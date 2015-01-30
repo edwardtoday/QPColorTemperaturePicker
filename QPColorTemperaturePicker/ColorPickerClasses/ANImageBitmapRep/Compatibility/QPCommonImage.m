@@ -8,7 +8,7 @@
 
 #include "QPCommonImage.h"
 
-CGImageRef CGImageFromANImage(QPImageObj *anImageObj) {
+CGImageRef CGImageFromQPImage(QPImageObj *anImageObj) {
 #if TARGET_OS_IPHONE
   return [anImageObj CGImage];
 #elif TARGET_OS_MAC

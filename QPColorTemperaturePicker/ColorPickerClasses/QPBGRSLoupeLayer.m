@@ -33,308 +33,333 @@
 
 @interface QPBGRSLoupeLayer ()
 
-@property (nonatomic) struct CGPath *gridCirclePath;
+@property(nonatomic) struct CGPath *gridCirclePath;
 
 - (void)drawGlintInContext:(CGContextRef)ctx;
 - (UIImage *)loupeImage;
 
 @end
 
-
 @implementation QPBGRSLoupeLayer
 
 @synthesize loupeCenter, colorPicker;
 
-const CGFloat LOUPE_SIZE = 85, SHADOW_SIZE = 6, RIM_THICKNESS = 3.0;
-const int NUM_PIXELS = 5, NUM_SKIP = 15;
+const CGFloat QP_LOUPE_SIZE = 85, QP_SHADOW_SIZE = 6, QP_RIM_THICKNESS = 3.0;
+const int QP_NUM_PIXELS = 5, QP_NUM_SKIP = 15;
 
 - (id)init {
-    self = [super init];
-    if (self) {
-        CGFloat size = LOUPE_SIZE+2*SHADOW_SIZE;
-        self.bounds = CGRectMake(-size/2,-size/2,size,size);
-        self.anchorPoint = CGPointMake(0.5, 1);
+  self = [super init];
+  if (self) {
+    CGFloat size = QP_LOUPE_SIZE + 2 * QP_SHADOW_SIZE;
+    self.bounds = CGRectMake(-size / 2, -size / 2, size, size);
+    self.anchorPoint = CGPointMake(0.5, 1);
 
-        UIImage *loupeImage = [self loupeImage];
-        CALayer *loupeLayer = [CALayer layer];
-        loupeLayer.bounds = self.bounds;
-        loupeLayer.position = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
-        loupeLayer.contents = (id)loupeImage.CGImage;
+    UIImage *loupeImage = [self loupeImage];
+    CALayer *loupeLayer = [CALayer layer];
+    loupeLayer.bounds = self.bounds;
+    loupeLayer.position =
+        CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+    loupeLayer.contents = (id)loupeImage.CGImage;
 
-        [self addSublayer:loupeLayer];
-    }
-    return self;
+    [self addSublayer:loupeLayer];
+  }
+  return self;
 }
 
 - (void)dealloc {
-    self.colorPicker = nil;
-    if (_gridCirclePath) CGPathRelease(_gridCirclePath);
+  self.colorPicker = nil;
+  if (_gridCirclePath)
+    CGPathRelease(_gridCirclePath);
 }
 
 - (struct CGPath *)gridCirclePath {
-    if (_gridCirclePath == NULL) {
-        CGMutablePathRef circlePath = CGPathCreateMutable();
-        const CGFloat radius = LOUPE_SIZE/2;
-        CGPathAddArc(circlePath, nil, 0, 0, radius-RIM_THICKNESS/2, 0, 2*M_PI, YES);
-        _gridCirclePath = circlePath;
-    }
-    return _gridCirclePath;
+  if (_gridCirclePath == NULL) {
+    CGMutablePathRef circlePath = CGPathCreateMutable();
+    const CGFloat radius = QP_LOUPE_SIZE / 2;
+    CGPathAddArc(circlePath, nil, 0, 0, radius - QP_RIM_THICKNESS / 2, 0,
+                 2 * M_PI, YES);
+    _gridCirclePath = circlePath;
+  }
+  return _gridCirclePath;
 }
 
 - (UIImage *)loupeImage {
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
+  UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 0);
 
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
+  CGContextRef ctx = UIGraphicsGetCurrentContext();
 
-    CGFloat size = LOUPE_SIZE+2*SHADOW_SIZE;
-    CGContextTranslateCTM(ctx, size/2, size/2);
+  CGFloat size = QP_LOUPE_SIZE + 2 * QP_SHADOW_SIZE;
+  CGContextTranslateCTM(ctx, size / 2, size / 2);
 
-    // Draw Shadow
-    CGContextSaveGState(ctx);     // Save before shadow
+  // Draw Shadow
+  CGContextSaveGState(ctx); // Save before shadow
 
-    UIBezierPath *inner = [UIBezierPath bezierPathWithOvalInRect:CGRectInset(self.bounds, SHADOW_SIZE + 1, SHADOW_SIZE + 1)];
-    UIBezierPath *outer = [UIBezierPath bezierPathWithRect:self.bounds];
-    [outer appendPath:inner];
-    outer.usesEvenOddFillRule = YES;
-    [outer addClip];
+  UIBezierPath *inner = [UIBezierPath
+      bezierPathWithOvalInRect:CGRectInset(self.bounds, QP_SHADOW_SIZE + 1,
+                                           QP_SHADOW_SIZE + 1)];
+  UIBezierPath *outer = [UIBezierPath bezierPathWithRect:self.bounds];
+  [outer appendPath:inner];
+  outer.usesEvenOddFillRule = YES;
+  [outer addClip];
 
-    CGSize shadowOffset = CGSizeMake(0,SHADOW_SIZE/2);
-    CGContextSetShadowWithColor(ctx, shadowOffset, SHADOW_SIZE/2, [UIColor blackColor].CGColor);
-    CGContextAddEllipseInRect(ctx, CGRectMake(-LOUPE_SIZE/2, -LOUPE_SIZE/2, LOUPE_SIZE, LOUPE_SIZE));
+  CGSize shadowOffset = CGSizeMake(0, QP_SHADOW_SIZE / 2);
+  CGContextSetShadowWithColor(ctx, shadowOffset, QP_SHADOW_SIZE / 2,
+                              [UIColor blackColor].CGColor);
+  CGContextAddEllipseInRect(ctx,
+                            CGRectMake(-QP_LOUPE_SIZE / 2, -QP_LOUPE_SIZE / 2,
+                                       QP_LOUPE_SIZE, QP_LOUPE_SIZE));
 
-    CGContextSetFillColorWithColor(ctx, [colorPicker selectionColor].CGColor);
-    CGContextFillPath(ctx);
+  CGContextSetFillColorWithColor(ctx, [colorPicker selectionColor].CGColor);
+  CGContextFillPath(ctx);
 
-    CGContextRestoreGState(ctx);  // Restore context after shadow
+  CGContextRestoreGState(ctx); // Restore context after shadow
 
-    // Create Cliping Area
-    CGContextSaveGState(ctx);     // Save context for cliping
+  // Create Cliping Area
+  CGContextSaveGState(ctx); // Save context for cliping
 
-    CGContextAddPath(ctx, self.gridCirclePath);  // Clip gird drawing to inside of loupe
-    CGContextClip(ctx);
+  CGContextAddPath(ctx,
+                   self.gridCirclePath); // Clip gird drawing to inside of loupe
+  CGContextClip(ctx);
 
-    [self drawGlintInContext:ctx];
+  [self drawGlintInContext:ctx];
 
-    CGContextRestoreGState(ctx);  // Restor from clip drawing
+  CGContextRestoreGState(ctx); // Restor from clip drawing
 
-    // Stroke Rim of Loupe
-    CGContextSetLineWidth(ctx, RIM_THICKNESS);
-    CGContextSetStrokeColorWithColor(ctx, [UIColor blackColor].CGColor);
-    CGContextAddPath(ctx, self.gridCirclePath);
-    CGContextStrokePath(ctx);
+  // Stroke Rim of Loupe
+  CGContextSetLineWidth(ctx, QP_RIM_THICKNESS);
+  CGContextSetStrokeColorWithColor(ctx, [UIColor blackColor].CGColor);
+  CGContextAddPath(ctx, self.gridCirclePath);
+  CGContextStrokePath(ctx);
 
-    // Draw center of rim loupe
-    CGContextSetLineWidth(ctx, RIM_THICKNESS-1);
-    CGContextSetStrokeColorWithColor(ctx, [UIColor whiteColor].CGColor);
-    CGContextAddPath(ctx, self.gridCirclePath);
-    CGContextStrokePath(ctx);
+  // Draw center of rim loupe
+  CGContextSetLineWidth(ctx, QP_RIM_THICKNESS - 1);
+  CGContextSetStrokeColorWithColor(ctx, [UIColor whiteColor].CGColor);
+  CGContextAddPath(ctx, self.gridCirclePath);
+  CGContextStrokePath(ctx);
 
-    const CGFloat w = ceilf(LOUPE_SIZE/NUM_PIXELS);
+  const CGFloat w = ceilf(QP_LOUPE_SIZE / QP_NUM_PIXELS);
 
-    // Draw Selection Square
-    CGFloat xyOffset = -(w+1)/2;
-    CGRect selectedRect = CGRectMake(xyOffset, xyOffset, w, w);
-    CGContextAddRect(ctx, selectedRect);
+  // Draw Selection Square
+  CGFloat xyOffset = -(w + 1) / 2;
+  CGRect selectedRect = CGRectMake(xyOffset, xyOffset, w, w);
+  CGContextAddRect(ctx, selectedRect);
 
-    CGContextSetStrokeColorWithColor(ctx, [UIColor blackColor].CGColor);
-    CGContextSetLineWidth(ctx, 1.0);
-    CGContextStrokePath(ctx);
+  CGContextSetStrokeColorWithColor(ctx, [UIColor blackColor].CGColor);
+  CGContextSetLineWidth(ctx, 1.0);
+  CGContextStrokePath(ctx);
 
-
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
+  UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  return image;
 }
 
 - (void)drawInContext:(CGContextRef)ctx {
-    CGContextAddPath(ctx, self.gridCirclePath);  // Clip gird drawing to inside of loupe
-    CGContextClip(ctx);
+  CGContextAddPath(ctx,
+                   self.gridCirclePath); // Clip gird drawing to inside of loupe
+  CGContextClip(ctx);
 
-    // Draw Opacity Background
-    NSInteger numCols = 6;
-    CGFloat loupeLength = LOUPE_SIZE;
-    CGFloat pixelLength = loupeLength / numCols;
+  // Draw Opacity Background
+  NSInteger numCols = 6;
+  CGFloat loupeLength = QP_LOUPE_SIZE;
+  CGFloat pixelLength = loupeLength / numCols;
 
-    UIColor *colorWhite = [UIColor whiteColor];
-    UIColor *colorGray = [UIColor grayColor];
+  UIColor *colorWhite = [UIColor whiteColor];
+  UIColor *colorGray = [UIColor grayColor];
 
-    UIColor *color1;
-    UIColor *color2;
-    UIColor *pixelColor;
-    for (int j = 0; j < numCols; j++){
-        color1 = (j % 2) ? colorWhite : colorGray;
-        color2 = (j % 2) ? colorGray : colorWhite;
+  UIColor *color1;
+  UIColor *color2;
+  UIColor *pixelColor;
+  for (int j = 0; j < numCols; j++) {
+    color1 = (j % 2) ? colorWhite : colorGray;
+    color2 = (j % 2) ? colorGray : colorWhite;
 
-        for (int i = 0; i  < numCols; i++){
-            CGRect pixelRect = CGRectMake((pixelLength * i) - (loupeLength / 2),
-                                          (pixelLength * j) - (loupeLength / 2),
-                                          pixelLength,
-                                          pixelLength);
+    for (int i = 0; i < numCols; i++) {
+      CGRect pixelRect = CGRectMake((pixelLength * i) - (loupeLength / 2),
+                                    (pixelLength * j) - (loupeLength / 2),
+                                    pixelLength, pixelLength);
 
-            pixelColor = (i % 2) ? color1 : color2;
-            CGContextSetFillColorWithColor(ctx, pixelColor.CGColor);
-            CGContextFillRect(ctx, pixelRect);
-        }
+      pixelColor = (i % 2) ? color1 : color2;
+      CGContextSetFillColorWithColor(ctx, pixelColor.CGColor);
+      CGContextFillRect(ctx, pixelRect);
     }
+  }
 
-    [self drawGridInContext:ctx];
+  [self drawGridInContext:ctx];
 }
 
 - (void)drawGridInContext:(CGContextRef)ctx {
-    const CGFloat w = ceilf(LOUPE_SIZE/NUM_PIXELS);
+  const CGFloat w = ceilf(QP_LOUPE_SIZE / QP_NUM_PIXELS);
 
-    CGPoint currentPoint = [colorPicker selection];
-    currentPoint.x -= NUM_PIXELS*NUM_SKIP/2;
-    currentPoint.y -= NUM_PIXELS*NUM_SKIP/2;
-    int i,j;
+  CGPoint currentPoint = [colorPicker selection];
+  currentPoint.x -= QP_NUM_PIXELS * QP_NUM_SKIP / 2;
+  currentPoint.y -= QP_NUM_PIXELS * QP_NUM_SKIP / 2;
+  int i, j;
 
-    // Draw Pixelated Loupe
-    for (j=0; j<NUM_PIXELS; j++){
-        for (i=0; i<NUM_PIXELS; i++){
+  // Draw Pixelated Loupe
+  for (j = 0; j < QP_NUM_PIXELS; j++) {
+    for (i = 0; i < QP_NUM_PIXELS; i++) {
 
-            CGRect pixelRect = CGRectMake(w*i-LOUPE_SIZE/2, w*j-LOUPE_SIZE/2, w, w);
-            UIColor *pixelColor = [self.colorPicker colorAtPoint:currentPoint];
-            CGContextSetFillColorWithColor(ctx, pixelColor.CGColor);
-            CGContextFillRect(ctx, pixelRect);
+      CGRect pixelRect = CGRectMake(w * i - QP_LOUPE_SIZE / 2,
+                                    w * j - QP_LOUPE_SIZE / 2, w, w);
+      UIColor *pixelColor = [self.colorPicker colorAtPoint:currentPoint];
+      CGContextSetFillColorWithColor(ctx, pixelColor.CGColor);
+      CGContextFillRect(ctx, pixelRect);
 
-            currentPoint.x += NUM_SKIP;
-        }
-        currentPoint.x -= NUM_PIXELS*NUM_SKIP;
-        currentPoint.y += NUM_SKIP;
+      currentPoint.x += QP_NUM_SKIP;
     }
+    currentPoint.x -= QP_NUM_PIXELS * QP_NUM_SKIP;
+    currentPoint.y += QP_NUM_SKIP;
+  }
 }
 
-- (void)drawGlintInContext:(CGContextRef)ctx{
-    // Draw Top Glint
-    CGFloat radius =      LOUPE_SIZE/2;
-    CGFloat glintRadius = 1.50*LOUPE_SIZE;
-    CGFloat drop =        0.25*LOUPE_SIZE;
-    CGFloat yOff = drop + glintRadius - radius;
+- (void)drawGlintInContext:(CGContextRef)ctx {
+  // Draw Top Glint
+  CGFloat radius = QP_LOUPE_SIZE / 2;
+  CGFloat glintRadius = 1.50 * QP_LOUPE_SIZE;
+  CGFloat drop = 0.25 * QP_LOUPE_SIZE;
+  CGFloat yOff = drop + glintRadius - radius;
 
-    // Calculations
-    CGFloat glintAngle1 = acosf((yOff*yOff + glintRadius*glintRadius - radius*radius)
-                                /(2*yOff*glintRadius));
-    CGFloat glintAngle2 = asinf(glintRadius/radius * sinf(glintAngle1));
-    CGFloat glintEdgeHeight = -radius*sinf(glintAngle2-M_PI_2);
+  // Calculations
+  CGFloat glintAngle1 =
+      acosf((yOff * yOff + glintRadius * glintRadius - radius * radius) /
+            (2 * yOff * glintRadius));
+  CGFloat glintAngle2 = asinf(glintRadius / radius * sinf(glintAngle1));
+  CGFloat glintEdgeHeight = -radius * sinf(glintAngle2 - M_PI_2);
 
-    // Add bottom arc
-    CGContextAddArc(ctx, 0, yOff, glintRadius, -M_PI_2+glintAngle1, -M_PI_2-glintAngle1, YES);
+  // Add bottom arc
+  CGContextAddArc(ctx, 0, yOff, glintRadius, -M_PI_2 + glintAngle1,
+                  -M_PI_2 - glintAngle1, YES);
 
-    // Add top arc
-    CGContextAddArc(ctx, 0, 0, radius, -M_PI_2-glintAngle2, -M_PI_2+glintAngle2, NO);
+  // Add top arc
+  CGContextAddArc(ctx, 0, 0, radius, -M_PI_2 - glintAngle2,
+                  -M_PI_2 + glintAngle2, NO);
 
-    CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
-    //CGContextStrokePath(ctx);
-    //return;
+  CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
+  // CGContextStrokePath(ctx);
+  // return;
 
-    CGContextClosePath(ctx);
-    CGContextSaveGState(ctx);     // Save context for cliping
-    CGContextClip(ctx);
+  CGContextClosePath(ctx);
+  CGContextSaveGState(ctx); // Save context for cliping
+  CGContextClip(ctx);
 
-    CGColorSpaceRef space = CGColorSpaceCreateDeviceGray();
-    NSArray *colors = @[(id)[UIColor colorWithWhite:1.0 alpha:0.65].CGColor,
-                        (id)[UIColor colorWithWhite:1.0 alpha:0.15].CGColor];
+  CGColorSpaceRef space = CGColorSpaceCreateDeviceGray();
+  NSArray *colors = @[
+    (id)[UIColor colorWithWhite : 1.0 alpha : 0.65].CGColor,
+    (id)[UIColor colorWithWhite : 1.0 alpha : 0.15].CGColor
+  ];
 
-    CGGradientRef myGradient = CGGradientCreateWithColors(space, (__bridge CFArrayRef)colors, NULL);
+  CGGradientRef myGradient =
+      CGGradientCreateWithColors(space, (__bridge CFArrayRef)colors, NULL);
 
-    CGContextDrawLinearGradient(ctx, myGradient ,CGPointMake(0,-radius), CGPointMake(0,-glintEdgeHeight), 0);
-    CGGradientRelease(myGradient);
-    CGContextRestoreGState(ctx);
+  CGContextDrawLinearGradient(ctx, myGradient, CGPointMake(0, -radius),
+                              CGPointMake(0, -glintEdgeHeight), 0);
+  CGGradientRelease(myGradient);
+  CGContextRestoreGState(ctx);
 
+  // Draw bottom glint
+  yOff = 0.40 * QP_LOUPE_SIZE;
+  radius = 0.40 * QP_LOUPE_SIZE;
+  CGPoint glintCenter = CGPointMake(0, yOff);
 
-    // Draw bottom glint
-    yOff   = 0.40*LOUPE_SIZE;
-    radius = 0.40*LOUPE_SIZE;
-    CGPoint glintCenter = CGPointMake(0, yOff);
+  CGContextAddArc(ctx, 0, yOff, radius, 0, M_2_PI, YES);
+  CGContextSaveGState(ctx); // Save context for cliping
+  CGContextClip(ctx);
 
-    CGContextAddArc(ctx, 0, yOff, radius, 0, M_2_PI, YES);
-    CGContextSaveGState(ctx);     // Save context for cliping
-    CGContextClip(ctx);
+  colors = @[
+    (id)[UIColor colorWithWhite : 1.0 alpha : 0.5].CGColor,
+    (id)[UIColor colorWithWhite : 1.0 alpha : 0.0].CGColor
+  ];
 
-    colors = @[(id)[UIColor colorWithWhite:1.0 alpha:0.5].CGColor,
-               (id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor];
+  myGradient =
+      CGGradientCreateWithColors(space, (__bridge CFArrayRef)colors, NULL);
 
-    myGradient = CGGradientCreateWithColors(space, (__bridge CFArrayRef)colors, NULL);
+  CGContextDrawRadialGradient(ctx, myGradient, glintCenter, 0.0, glintCenter,
+                              radius, 0.0);
+  CGGradientRelease(myGradient);
+  CGContextRestoreGState(ctx);
 
-    CGContextDrawRadialGradient(ctx, myGradient, glintCenter, 0.0, glintCenter, radius, 0.0);
-    CGGradientRelease(myGradient);
-    CGContextRestoreGState(ctx);
-
-    // Release objects
-    CGColorSpaceRelease(space);
+  // Release objects
+  CGColorSpaceRelease(space);
 }
 
 #pragma mark - Animation -
 
 static NSString *const kAppearKey = @"cp_l_appear";
 
-- (void)appearInColorPicker:(QPColorTemperaturePickerView*)aColorPicker{
-    if (self.colorPicker != aColorPicker) {
-        self.colorPicker = aColorPicker;
-    }
+- (void)appearInColorPicker:(QPColorTemperaturePickerView *)aColorPicker {
+  if (self.colorPicker != aColorPicker) {
+    self.colorPicker = aColorPicker;
+  }
 
-    [self removeAllAnimations];
-    self.transform = CATransform3DIdentity;
-    isReadyToDismiss = NO;
+  [self removeAllAnimations];
+  self.transform = CATransform3DIdentity;
+  isReadyToDismiss = NO;
 
-    // Add Layer to color picker
-    [CATransaction setDisableActions:YES];
-    [self.colorPicker.layer addSublayer:self];
+  // Add Layer to color picker
+  [CATransaction setDisableActions:YES];
+  [self.colorPicker.layer addSublayer:self];
 
-    // Animate Arival
-    isRunningInitialAnimation = YES;
-    CAKeyframeAnimation *springEffect = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
-    springEffect.values = @[@(0.1), @(1.4), @(0.95), @(1)];
-    springEffect.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    springEffect.removedOnCompletion = NO;
-    springEffect.duration = 0.35f;
-    springEffect.delegate = self;
+  // Animate Arival
+  isRunningInitialAnimation = YES;
+  CAKeyframeAnimation *springEffect =
+      [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
+  springEffect.values = @[ @(0.1), @(1.4), @(0.95), @(1) ];
+  springEffect.timingFunction = [CAMediaTimingFunction
+      functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+  springEffect.removedOnCompletion = NO;
+  springEffect.duration = 0.35f;
+  springEffect.delegate = self;
 
-    // Animate
-    [self addAnimation:springEffect forKey:kAppearKey];
+  // Animate
+  [self addAnimation:springEffect forKey:kAppearKey];
 }
 
 /**
- * Disapear removes the loupe view from the color picker by shrinking it down to zero
+ * Disapear removes the loupe view from the color picker by shrinking it down to
+ * zero
  */
 static NSString *const kDisappearKey = @"cp_l_disappear";
 
 - (void)disappear {
-    [self disappearAnimated:YES];
+  [self disappearAnimated:YES];
 }
 
 - (void)disappearAnimated:(BOOL)anim {
-    isReadyToDismiss = YES;
-    if (isRunningInitialAnimation) return;
+  isReadyToDismiss = YES;
+  if (isRunningInitialAnimation)
+    return;
 
-    if (!anim) {
-        [self removeFromSuperlayer];
-        return;
-    }
+  if (!anim) {
+    [self removeFromSuperlayer];
+    return;
+  }
 
-    self.transform = CATransform3DMakeScale(0.01, 0.01, 1);
+  self.transform = CATransform3DMakeScale(0.01, 0.01, 1);
 
-    CABasicAnimation *disapear = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    disapear.fromValue = @(1);
-    disapear.duration  = 0.1f;
-    disapear.delegate  = self;
-    disapear.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    disapear.removedOnCompletion = NO;
-    [self addAnimation:disapear forKey:kDisappearKey];
+  CABasicAnimation *disapear =
+      [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+  disapear.fromValue = @(1);
+  disapear.duration = 0.1f;
+  disapear.delegate = self;
+  disapear.timingFunction = [CAMediaTimingFunction
+      functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+  disapear.removedOnCompletion = NO;
+  [self addAnimation:disapear forKey:kDisappearKey];
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-    if (anim == [self animationForKey:kDisappearKey]){
-        if (!flag) return;
+  if (anim == [self animationForKey:kDisappearKey]) {
+    if (!flag)
+      return;
 
-        [self removeFromSuperlayer];
-        self.transform = CATransform3DIdentity;
-    } else if (anim == [self animationForKey:kAppearKey]) {
-        isRunningInitialAnimation = NO;
-        if (isReadyToDismiss) {
-            [self disappear];
-        }
+    [self removeFromSuperlayer];
+    self.transform = CATransform3DIdentity;
+  } else if (anim == [self animationForKey:kAppearKey]) {
+    isRunningInitialAnimation = NO;
+    if (isReadyToDismiss) {
+      [self disappear];
     }
+  }
 }
 
 @end

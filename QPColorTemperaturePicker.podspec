@@ -1,15 +1,15 @@
 Pod::Spec.new do |s|
   s.name         = "QPColorTemperaturePicker"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "iPhone color temperature picker view with brightness control and delegation support."
   s.description  = <<-DESC
                    iPhone color temperature picker view with brightness control and delegation support.
                    DESC
   s.homepage     = "https://github.com/edwardtoday/RSColorPicker"
-  s.screenshots  = "https://raw.github.com/edwardtoday/QPColorTemperautrePicker/v0.1.0/Example01.png", "https://raw.github.com/edwardtoday/QPColorTemperautrePicker/v0.1.0/Example02.png", "https://raw.github.com/edwardtoday/QPColorTemperautrePicker/v0.1.0/Example03.png", "https://raw.github.com/edwardtoday/QPColorTemperautrePicker/v0.1.0/Example04.png"
+  s.screenshots  = "https://raw.github.com/edwardtoday/QPColorTemperautrePicker/v0.1.1/Example01.png", "https://raw.github.com/edwardtoday/QPColorTemperautrePicker/v0.1.1/Example02.png", "https://raw.github.com/edwardtoday/QPColorTemperautrePicker/v0.1.1/Example03.png", "https://raw.github.com/edwardtoday/QPColorTemperautrePicker/v0.1.1/Example04.png"
   s.license      = { :type => 'BSD', :file => "LICENSE.md" }
   s.author       = { "Pei" => "edwardtoday@gmail.com" }
-  s.source       = { :git => "https://github.com/edwardtoday/QPColorTemperaturePicker.git", :tag => "v0.1.0" }
+  s.source       = { :git => "https://github.com/edwardtoday/QPColorTemperaturePicker.git", :tag => "v0.1.1" }
   s.platform     = :ios, '6.0'
   s.source_files = 'QPColorTemperaturePicker/ColorPickerClasses/**/*.{h,m}'
   s.frameworks   = 'QuartzCore', 'CoreGraphics', 'UIKit', 'Accelerate'

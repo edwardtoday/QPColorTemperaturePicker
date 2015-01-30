@@ -20,7 +20,7 @@ typedef UIImage QPImageObj;
 typedef NSImage QPImageObj;
 #endif
 
-CGImageRef CGImageFromANImage(QPImageObj *QPImageObj);
+CGImageRef CGImageFromQPImage(QPImageObj *QPImageObj);
 QPImageObj *QPImageFromCGImage(CGImageRef imageRef);
 
 #endif

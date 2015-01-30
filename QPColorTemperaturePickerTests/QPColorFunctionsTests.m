@@ -35,7 +35,7 @@
   for (CGFloat h = 0; h < 1; h += 0.05) {
     for (CGFloat s = 0; s < 1; s += 0.05) {
       for (CGFloat v = 0; v < 0; v += 0.05) {
-        actual = UIColorFromBMPixel(QPPixelFromHSV(h, s, v, 1));
+        actual = UIColorFromQPPixel(QPPixelFromHSV(h, s, v, 1));
         expected = [UIColor colorWithHue:h saturation:s brightness:v alpha:1.0];
         [self assertColor:actual equalsColor:expected];
       }

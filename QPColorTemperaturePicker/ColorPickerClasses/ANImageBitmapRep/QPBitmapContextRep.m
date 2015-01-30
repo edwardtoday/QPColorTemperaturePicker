@@ -27,7 +27,7 @@ BMPoint QPBMPointFromPoint(CGPoint point) {
 
 - (id)initWithImage:(QPImageObj *)image {
   if ((self = [super init])) {
-    CGImageRef img = CGImageFromANImage(image);
+    CGImageRef img = CGImageFromQPImage(image);
     context = [QPCGContextCreator newARGBBitmapContextWithImage:img];
     bitmapData = CGBitmapContextGetData(context);
     lastImage = CGImageRetain(img);

@@ -29,7 +29,7 @@ BMPixel QPBMPixelMake(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha,
 }
 
 #if TARGET_OS_IPHONE
-UIColor *UIColorFromBMPixel(BMPixel pixel) {
+UIColor *UIColorFromQPPixel(BMPixel pixel) {
   return [UIColor colorWithRed:pixel.red
                          green:pixel.green
                           blue:pixel.blue
