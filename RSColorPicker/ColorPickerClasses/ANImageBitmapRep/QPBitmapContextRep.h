@@ -1,5 +1,5 @@
 //
-//  BitmapContextRep.h
+//  QPBitmapContextRep.h
 //  ImageManip
 //
 //  Created by Alex Nichol on 7/12/11.
@@ -16,24 +16,24 @@
  * does not use floating points, making it more accurate.
  */
 typedef struct {
-    long x;
-    long y;
+  long x;
+  long y;
 } BMPoint;
 
-BMPoint BMPointMake (long x, long y);
-BMPoint BMPointFromSize (CGSize size);
-BMPoint BMPointFromPoint (CGPoint point);
+BMPoint BMPointMake(long x, long y);
+BMPoint BMPointFromSize(CGSize size);
+BMPoint BMPointFromPoint(CGPoint point);
 
 /**
  * BitmapContextRep is a concrete subclass of NSObject that provides a basic
  * class for mutating image's bitmaps.  This class is very barebones,
  * and generally will not be enough for most image manipulation.
  */
-@interface BitmapContextRep : NSObject {
-    CGContextRef context;
-    CGImageRef lastImage;
-    unsigned char * bitmapData;
-    BOOL needsUpdate;
+@interface QPBitmapContextRep : NSObject {
+  CGContextRef context;
+  CGImageRef lastImage;
+  unsigned char *bitmapData;
+  BOOL needsUpdate;
 }
 
 /**
@@ -84,7 +84,7 @@ BMPoint BMPointFromPoint (CGPoint point);
 
 /**
  * Returns by reference a 4-byte RGBA pixel at a certain point.
- * @param rgba A pointer to a 4-byte or more pixel buffer. 
+ * @param rgba A pointer to a 4-byte or more pixel buffer.
  * @param point The point from which a pixel will be read.  For all
  * points in a BitmapContextRep, the x and y values start at 0 and end
  * at width - 1 and height - 1 respectively.
@@ -97,7 +97,8 @@ BMPoint BMPointFromPoint (CGPoint point);
  * @param point The point at which the pixel will be set.  For all
  * points in a BitmapContextRep, the x and y values start at 0 and end
  * at width - 1 and height - 1 respectively.
- * @discussion Since alpha is premultiplied, it is important to remember to multiply
+ * @discussion Since alpha is premultiplied, it is important to remember to
+ * multiply
  * the alpha as a percentage by the RGB values.  This means that a white pixel
  * with 50% alpha would become rgba(128, 128, 128, 128).
  */

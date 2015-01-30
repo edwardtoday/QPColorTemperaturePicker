@@ -28,8 +28,8 @@ UIColor *UIColorFromBMPixel(BMPixel pixel);
 NSColor *NSColorFromBMPixel(BMPixel pixel);
 #endif
 
-@interface ANImageBitmapRep
-    : BitmapContextRep <BitmapScaleManipulator, BitmapCropManipulator,
+@interface QPImageBitmapRep
+    : QPBitmapContextRep <BitmapScaleManipulator, BitmapCropManipulator,
                         BitmapRotationManipulator, BitmapDrawManipulator,
                         NSCopying> {
 #if __has_feature(objc_arc) == 1
@@ -45,8 +45,8 @@ NSColor *NSColorFromBMPixel(BMPixel pixel);
 + (ANImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage
     __attribute__((ns_returns_autoreleased));
 #else
-+ (ANImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize;
-+ (ANImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage;
++ (QPImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize;
++ (QPImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage;
 #endif
 
 /**

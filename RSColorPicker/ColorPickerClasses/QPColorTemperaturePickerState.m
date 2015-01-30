@@ -1,17 +1,17 @@
 //
-//  RSColorPickerState.m
-//  RSColorPicker
+//  QPColorTemperaturePickerState.m
+//  QPColorTemperaturePicker
 //
 //  Created by Alex Nichol on 12/16/13.
 //
 
-#import "RSColorPickerState.h"
+#import "QPColorTemperaturePickerState.h"
 
 static CGFloat _calculateHue(CGPoint point);
 static CGFloat _calculateSaturation(CGPoint point);
 static CGPoint _calculatePoint(CGFloat hue, CGFloat saturation);
 
-@implementation RSColorPickerState
+@implementation QPColorTemperaturePickerState
 
 @synthesize brightness, alpha;
 
@@ -28,7 +28,7 @@ static CGPoint _calculatePoint(CGFloat hue, CGFloat saturation);
   return [UIColor colorWithRed:1.0 green:1.0 blue:b alpha:alpha];
 }
 
-+ (RSColorPickerState *)stateForPoint:(CGPoint)point
++ (QPColorTemperaturePickerState *)stateForPoint:(CGPoint)point
                                  size:(CGFloat)size
                               padding:(CGFloat)padding {
   // calculate everything we need to know
@@ -37,7 +37,7 @@ static CGPoint _calculatePoint(CGFloat hue, CGFloat saturation);
   CGPoint scaledRelativePoint = relativePoint;
   scaledRelativePoint.x /= (size / 2.0) - padding;
   scaledRelativePoint.y /= (size / 2.0) - padding;
-  return [[RSColorPickerState alloc]
+  return [[QPColorTemperaturePickerState alloc]
       initWithScaledRelativePoint:scaledRelativePoint
                        brightness:1
                             alpha:1];
@@ -46,7 +46,7 @@ static CGPoint _calculatePoint(CGFloat hue, CGFloat saturation);
 - (id)initWithColor:(UIColor *)_selectionColor {
   if ((self = [super init])) {
     CGFloat rgba[4];
-    RSGetComponentsForColor(rgba, _selectionColor);
+    QPGetComponentsForColor(rgba, _selectionColor);
     UIColor *selectionColor =
         [UIColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]];
     CGFloat hue, saturation;
@@ -91,30 +91,30 @@ static CGPoint _calculatePoint(CGFloat hue, CGFloat saturation);
 
 #pragma mark - Modification
 
-- (RSColorPickerState *)stateBySettingBrightness:(CGFloat)newBright {
-  return [[RSColorPickerState alloc]
+- (QPColorTemperaturePickerState *)stateBySettingBrightness:(CGFloat)newBright {
+  return [[QPColorTemperaturePickerState alloc]
       initWithScaledRelativePoint:scaledRelativePoint
                        brightness:newBright
                             alpha:alpha];
 }
 
-- (RSColorPickerState *)stateBySettingAlpha:(CGFloat)newAlpha {
-  return [[RSColorPickerState alloc]
+- (QPColorTemperaturePickerState *)stateBySettingAlpha:(CGFloat)newAlpha {
+  return [[QPColorTemperaturePickerState alloc]
       initWithScaledRelativePoint:scaledRelativePoint
                        brightness:brightness
                             alpha:newAlpha];
 }
 
-- (RSColorPickerState *)stateBySettingHue:(CGFloat)newHue {
+- (QPColorTemperaturePickerState *)stateBySettingHue:(CGFloat)newHue {
   CGPoint newPoint = _calculatePoint(newHue, self.saturation);
-  return [[RSColorPickerState alloc] initWithScaledRelativePoint:newPoint
+  return [[QPColorTemperaturePickerState alloc] initWithScaledRelativePoint:newPoint
                                                       brightness:brightness
                                                            alpha:alpha];
 }
 
-- (RSColorPickerState *)stateBySettingSaturation:(CGFloat)newSaturation {
+- (QPColorTemperaturePickerState *)stateBySettingSaturation:(CGFloat)newSaturation {
   CGPoint newPoint = _calculatePoint(self.hue, newSaturation);
-  return [[RSColorPickerState alloc] initWithScaledRelativePoint:newPoint
+  return [[QPColorTemperaturePickerState alloc] initWithScaledRelativePoint:newPoint
                                                       brightness:brightness
                                                            alpha:alpha];
 }

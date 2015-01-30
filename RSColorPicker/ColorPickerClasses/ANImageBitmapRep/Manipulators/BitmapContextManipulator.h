@@ -7,22 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BitmapContextRep.h"
+#import "QPBitmapContextRep.h"
 
 @interface BitmapContextManipulator : NSObject <BitmapContextRep> {
 #if __has_feature(objc_arc) == 1
     __unsafe_unretained BitmapContextRep * bitmapContext;
 #else
-    BitmapContextRep * bitmapContext;
+    QPBitmapContextRep * bitmapContext;
 #endif
 }
 
 #if __has_feature(objc_arc) == 1
 @property (nonatomic, assign) BitmapContextRep * bitmapContext;
 #else
-@property (nonatomic, assign) BitmapContextRep * bitmapContext;
+@property (nonatomic, assign) QPBitmapContextRep * bitmapContext;
 #endif
 
-- (id)initWithContext:(BitmapContextRep *)aContext;
+- (id)initWithContext:(QPBitmapContextRep *)aContext;
 
 @end

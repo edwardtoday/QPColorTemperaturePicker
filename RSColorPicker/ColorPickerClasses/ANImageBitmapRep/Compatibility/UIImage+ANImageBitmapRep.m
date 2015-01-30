@@ -11,25 +11,25 @@
 #if TARGET_OS_IPHONE
 
 #import "UIImage+ANImageBitmapRep.h"
-#import "ANImageBitmapRep.h"
+#import "QPImageBitmapRep.h"
 
 @implementation UIImage (ANImageBitmapRep)
 
 
-+ (UIImage *)imageFromImageBitmapRep:(ANImageBitmapRep *)ibr {
++ (UIImage *)imageFromImageBitmapRep:(QPImageBitmapRep *)ibr {
     return [ibr image];
 }
 
-- (ANImageBitmapRep *)imageBitmapRep {
+- (QPImageBitmapRep *)imageBitmapRep {
 #if __has_feature(objc_arc) == 1
     return [[ANImageBitmapRep alloc] initWithImage:self];
 #else
-    return [[[ANImageBitmapRep alloc] initWithImage:self] autorelease];
+    return [[[QPImageBitmapRep alloc] initWithImage:self] autorelease];
 #endif
 }
 
 - (UIImage *)imageByScalingToSize:(CGSize)sz {
-    ANImageBitmapRep * imageBitmap = [[ANImageBitmapRep alloc] initWithImage:self];
+    QPImageBitmapRep * imageBitmap = [[QPImageBitmapRep alloc] initWithImage:self];
     [imageBitmap setSize:BMPointMake(round(sz.width), round(sz.height))];
     UIImage * scaled = [imageBitmap image];
 #if __has_feature(objc_arc) != 1
@@ -39,7 +39,7 @@
 }
 
 - (UIImage *)imageFittingFrame:(CGSize)sz {
-    ANImageBitmapRep * imageBitmap = [[ANImageBitmapRep alloc] initWithImage:self];
+    QPImageBitmapRep * imageBitmap = [[QPImageBitmapRep alloc] initWithImage:self];
     [imageBitmap setSizeFittingFrame:BMPointMake(round(sz.width), round(sz.height))];
     UIImage * scaled = [imageBitmap image];
 #if __has_feature(objc_arc) != 1
@@ -49,7 +49,7 @@
 }
 
 - (UIImage *)imageFillingFrame:(CGSize)sz {
-    ANImageBitmapRep * imageBitmap = [[ANImageBitmapRep alloc] initWithImage:self];
+    QPImageBitmapRep * imageBitmap = [[QPImageBitmapRep alloc] initWithImage:self];
     [imageBitmap setSizeFillingFrame:BMPointMake(round(sz.width), round(sz.height))];
     UIImage * scaled = [imageBitmap image];
 #if __has_feature(objc_arc) != 1

@@ -1,8 +1,8 @@
 //
-//  RSColorPickerView.h
-//  RSColorPicker
+//  QPColorTemperaturePickerView.h
+//  QPColorTemperaturePicker
 //
-//  Created by Ryan Sullivan on 8/12/11.
+//  Created by Pei Qing on 8/12/11.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,7 +11,7 @@
 
 @class RSColorPickerView, BGRSLoupeLayer;
 
-@protocol RSColorPickerViewDelegate <NSObject>
+@protocol QPColorTemperaturePickerViewDelegate <NSObject>
 /**
  * Called everytime the color picker's selection/color is changed.
  * Don't do expensive operations here as it will slow down your app.
@@ -22,7 +22,7 @@
 - (void)colorPicker:(RSColorPickerView *)colorPicker touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 @end
 
-@interface RSColorPickerView : UIView
+@interface QPColorTemperaturePickerView : UIView
 
 /**
  * Specifies if the color picker should be drawn as a circle, or as a square.
@@ -48,7 +48,7 @@
 /**
  * The delegate
  */
-@property (nonatomic, weak) id <RSColorPickerViewDelegate> delegate;
+@property (nonatomic, weak) id <QPColorTemperaturePickerViewDelegate> delegate;
 
 /**
  * The current point (in the color picker's bounds) of the selected color.

@@ -1,30 +1,30 @@
 //
-//  RSColorPickerView.m
-//  RSColorPicker
+//  QPColorTemperaturePickerView.m
+//  QPColorTemperaturePicker
 //
-//  Created by Ryan Sullivan on 8/12/11.
+//  Created by Pei Qing on 8/12/11.
 //
 
 
-#import "ANImageBitmapRep.h"
+#import "QPImageBitmapRep.h"
 
 #import "BGRSLoupeLayer.h"
-#import "RSColorFunctions.h"
-#import "RSColorPickerState.h"
-#import "RSColorPickerView.h"
+#import "QPColorFunctions.h"
+#import "QPColorTemperaturePickerState.h"
+#import "QPColorTemperaturePickerView.h"
 #import "RSGenerateOperation.h"
-#import "RSSelectionLayer.h"
+#import "QPSelectionLayer.h"
 
 #define kSelectionViewSize 22
 
-@interface RSColorPickerView () {
+@interface QPColorTemperaturePickerView () {
     struct {
         unsigned int bitmapNeedsUpdate:1;
     } _colorPickerViewFlags;
-    RSColorPickerState * state;
+    QPColorTemperaturePickerState * state;
 }
 
-@property (nonatomic) ANImageBitmapRep *rep;
+@property (nonatomic) QPImageBitmapRep *rep;
 
 /**
  * A path which represents the shape of the color picker palette,
@@ -41,7 +41,7 @@
 /**
  * Layer which shows the circular selection "target".
  */
-@property (nonatomic) RSSelectionLayer *selectionLayer;
+@property (nonatomic) QPSelectionLayer *selectionLayer;
 
 /**
  * The layer which will ultimately contain the generated
@@ -94,7 +94,7 @@
 
 // touch handling
 - (CGPoint)validPointForTouch:(CGPoint)touchPoint;
-- (RSColorPickerState *)stateForPoint:(CGPoint)point;
+- (QPColorTemperaturePickerState *)stateForPoint:(CGPoint)point;
 - (void)updateStateForTouchPoint:(CGPoint)point;
 
 // metrics
@@ -103,7 +103,7 @@
 @end
 
 
-@implementation RSColorPickerView
+@implementation QPColorTemperaturePickerView
 
 #pragma mark - Object Lifecycle -
 
@@ -136,7 +136,7 @@
     _colorPickerViewFlags.bitmapNeedsUpdate = NO;
 
     // the view used to select the colour
-    self.selectionLayer = [RSSelectionLayer layer];
+    self.selectionLayer = [QPSelectionLayer layer];
     self.selectionLayer.frame = CGRectMake(0.0, 0.0, kSelectionViewSize, kSelectionViewSize);
     [self.selectionLayer setNeedsDisplay];
 
@@ -198,7 +198,7 @@
     self.brightnessLayer.frame  = self.bounds;
     self.opacityLayer.frame     = self.bounds;
 
-    self.opacityLayer.backgroundColor = [[UIColor colorWithPatternImage:RSOpacityBackgroundImage(20, self.scale, [UIColor colorWithWhite:0.5 alpha:1.0])] CGColor];
+    self.opacityLayer.backgroundColor = [[UIColor colorWithPatternImage:QPOpacityBackgroundImage(20, self.scale, [UIColor colorWithWhite:0.5 alpha:1.0])] CGColor];
 
     [self genBitmap];
     [self generateBezierPaths];
@@ -224,7 +224,7 @@
 
     self.rep = [self.class bitmapForDiameter:self.gradientLayer.bounds.size.width scale:self.scale padding:self.paddingDistance shouldCache:YES];
     _colorPickerViewFlags.bitmapNeedsUpdate = NO;
-    self.gradientLayer.contents = (id)[RSUIImageWithScale(self.rep.image, self.scale) CGImage];
+    self.gradientLayer.contents = (id)[QPUIImageWithScale(self.rep.image, self.scale) CGImage];
 }
 
 - (void)generateBezierPaths {
@@ -296,7 +296,7 @@
 }
 
 - (void)setSelectionColor:(UIColor *)selectionColor {
-    state = [[RSColorPickerState alloc] initWithColor:selectionColor];
+    state = [[QPColorTemperaturePickerState alloc] initWithColor:selectionColor];
     [self handleStateChanged];
 }
 
@@ -395,8 +395,8 @@
     }
 }
 
-- (RSColorPickerState *)stateForPoint:(CGPoint)point {
-    RSColorPickerState * newState = [RSColorPickerState stateForPoint:point
+- (QPColorTemperaturePickerState *)stateForPoint:(CGPoint)point {
+    QPColorTemperaturePickerState * newState = [QPColorTemperaturePickerState stateForPoint:point
                                                                  size:self.paletteDiameter
                                                               padding:self.paddingDistance];
     newState = [[newState stateBySettingAlpha:self.opacity] stateBySettingBrightness:self.brightness];
@@ -488,7 +488,7 @@ static dispatch_queue_t backgroundQueue;
 
 #pragma mark Generate Helper Method
 
-+ (ANImageBitmapRep *)bitmapForDiameter:(CGFloat)diameter scale:(CGFloat)scale padding:(CGFloat)paddingDistance shouldCache:(BOOL)cache {
++ (QPImageBitmapRep *)bitmapForDiameter:(CGFloat)diameter scale:(CGFloat)scale padding:(CGFloat)paddingDistance shouldCache:(BOOL)cache {
     RSGenerateOperation *repOp = nil;
 
     // Handle the scale here so the operation can just work with pixels directly

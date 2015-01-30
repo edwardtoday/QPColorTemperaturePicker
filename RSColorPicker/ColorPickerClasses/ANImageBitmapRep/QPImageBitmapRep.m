@@ -6,7 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "ANImageBitmapRep.h"
+#import "QPImageBitmapRep.h"
 
 BMPixel BMPixelMake(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha,
                     CGFloat k) {
@@ -44,13 +44,13 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
 }
 #endif
 
-@interface ANImageBitmapRep (BaseClasses)
+@interface QPImageBitmapRep (BaseClasses)
 
 - (void)generateBaseClasses;
 
 @end
 
-@implementation ANImageBitmapRep
+@implementation QPImageBitmapRep
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation {
   if (!baseClasses)
@@ -75,14 +75,14 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
   return [[ANImageBitmapRep alloc] initWithImage:anImage];
 }
 #else
-+ (ANImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize {
-  return [[[ANImageBitmapRep alloc]
++ (QPImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize {
+  return [[[QPImageBitmapRep alloc]
       initWithSize:BMPointMake(round(avgSize.width),
                                round(avgSize.height))] autorelease];
 }
 
-+ (ANImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage {
-  return [[[ANImageBitmapRep alloc] initWithImage:anImage] autorelease];
++ (QPImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage {
+  return [[[QPImageBitmapRep alloc] initWithImage:anImage] autorelease];
 }
 #endif
 
@@ -197,8 +197,8 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
 
 - (id)copyWithZone:(NSZone *)zone {
   BMPoint size = [self bitmapSize];
-  ANImageBitmapRep *rep =
-      [[ANImageBitmapRep allocWithZone:zone] initWithSize:size];
+  QPImageBitmapRep *rep =
+      [[QPImageBitmapRep allocWithZone:zone] initWithSize:size];
   CGContextRef newContext = [rep context];
   CGContextDrawImage(newContext, CGRectMake(0, 0, size.x, size.y),
                      [self CGImage]);

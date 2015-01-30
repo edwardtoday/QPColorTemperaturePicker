@@ -10,7 +10,7 @@
 
 #if TARGET_OS_IPHONE
 
-@class ANImageBitmapRep;
+@class QPImageBitmapRep;
 
 #import <UIKit/UIKit.h>
 
@@ -23,8 +23,8 @@
 - (UIImage *)imageFittingFrame:(CGSize)sz __attribute__((ns_returns_autoreleased));
 - (UIImage *)imageFillingFrame:(CGSize)sz __attribute__((ns_returns_autoreleased));
 #else
-+ (UIImage *)imageFromImageBitmapRep:(ANImageBitmapRep *)ibr;
-- (ANImageBitmapRep *)imageBitmapRep;
++ (UIImage *)imageFromImageBitmapRep:(QPImageBitmapRep *)ibr;
+- (QPImageBitmapRep *)imageBitmapRep;
 - (UIImage *)imageByScalingToSize:(CGSize)sz;
 - (UIImage *)imageFittingFrame:(CGSize)sz;
 - (UIImage *)imageFillingFrame:(CGSize)sz;

@@ -1,6 +1,6 @@
 //
 //  GenerateOperation.h
-//  RSColorPicker
+//  QPColorTemperaturePicker
 //
 //  Created by Ryan on 7/22/13.
 //
@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Accelerate/Accelerate.h>
 
-@class ANImageBitmapRep;
+@class QPImageBitmapRep;
 
 @interface RSGenerateOperation : NSOperation
 
@@ -17,6 +17,6 @@
 @property (readonly) CGFloat diameter;
 @property (readonly) CGFloat padding;
 
-@property ANImageBitmapRep *bitmap;
+@property QPImageBitmapRep *bitmap;
 
 @end

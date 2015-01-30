@@ -12,7 +12,7 @@
 
 @synthesize bitmapContext;
 
-- (id)initWithContext:(BitmapContextRep *)aContext {
+- (id)initWithContext:(QPBitmapContextRep *)aContext {
     if ((self = [super init])) {
         self.bitmapContext = aContext;
     }

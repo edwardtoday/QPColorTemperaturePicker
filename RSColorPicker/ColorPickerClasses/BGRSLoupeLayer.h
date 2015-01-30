@@ -31,7 +31,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@class RSColorPickerView;
+@class QPColorTemperaturePickerView;
 
 @interface BGRSLoupeLayer : CALayer {
     BOOL isReadyToDismiss;
@@ -39,13 +39,13 @@
 }
 
 @property (nonatomic) CGPoint loupeCenter;
-@property (nonatomic, weak) RSColorPickerView *colorPicker;
+@property (nonatomic, weak) QPColorTemperaturePickerView *colorPicker;
 
 #pragma mark - Drawing
 - (void)drawGridInContext:(CGContextRef)ctx;
 
 #pragma mark - Animation
-- (void)appearInColorPicker:(RSColorPickerView *)aColorPicker;
+- (void)appearInColorPicker:(QPColorTemperaturePickerView *)aColorPicker;
 - (void)disappear;
 - (void)disappearAnimated:(BOOL)anim;
 

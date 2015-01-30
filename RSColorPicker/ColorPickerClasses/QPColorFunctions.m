@@ -1,13 +1,13 @@
 //
-//  RSColorFunctions.m
-//  RSColorPicker
+//  QPColorFunctions.m
+//  QPColorTemperaturePicker
 //
-//  Created by Ryan Sullivan on 3/12/13.
+//  Created by Pei Qing on 3/12/13.
 //
 
-#import "RSColorFunctions.h"
+#import "QPColorFunctions.h"
 
-BMPixel RSPixelFromHSV(CGFloat H, CGFloat S, CGFloat V, CGFloat k) {
+BMPixel QPPixelFromHSV(CGFloat H, CGFloat S, CGFloat V, CGFloat k) {
   if (S == 0) {
     return BMPixelMake(V, V, V, 1.0, k);
   }
@@ -40,7 +40,7 @@ BMPixel RSPixelFromHSV(CGFloat H, CGFloat S, CGFloat V, CGFloat k) {
   return BMPixelMake(V, var_1, var_2, 1.0, k);
 }
 
-void RSHSVFromPixel(BMPixel pixel, CGFloat *h, CGFloat *s, CGFloat *v) {
+void QPHSVFromPixel(BMPixel pixel, CGFloat *h, CGFloat *s, CGFloat *v) {
   UIColor *color = [UIColor colorWithRed:pixel.red
                                    green:pixel.green
                                     blue:pixel.blue
@@ -48,7 +48,7 @@ void RSHSVFromPixel(BMPixel pixel, CGFloat *h, CGFloat *s, CGFloat *v) {
   [color getHue:h saturation:s brightness:v alpha:NULL];
 }
 
-void RSGetComponentsForColor(CGFloat *components, UIColor *color) {
+void QPGetComponentsForColor(CGFloat *components, UIColor *color) {
   // First try to get the components the right way
 
   if ([color getRed:&components[0]
@@ -85,7 +85,7 @@ void RSGetComponentsForColor(CGFloat *components, UIColor *color) {
   }
 }
 
-UIImage *RSUIImageWithScale(UIImage *img, CGFloat scale) {
+UIImage *QPUIImageWithScale(UIImage *img, CGFloat scale) {
   return [UIImage imageWithCGImage:img.CGImage
                              scale:scale
                        orientation:UIImageOrientationUp];
@@ -94,7 +94,7 @@ UIImage *RSUIImageWithScale(UIImage *img, CGFloat scale) {
 /**
  * Returns image that looks like a checkered background.
  */
-UIImage *RSOpacityBackgroundImage(CGFloat length, CGFloat scale,
+UIImage *QPOpacityBackgroundImage(CGFloat length, CGFloat scale,
                                   UIColor *color) {
   NSCAssert(scale > 0,
             @"Tried to create opacity background image with scale 0");
@@ -126,10 +126,10 @@ UIImage *RSOpacityBackgroundImage(CGFloat length, CGFloat scale,
   UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
 
-  return RSUIImageWithScale(image, scale);
+  return QPUIImageWithScale(image, scale);
 }
 
-UIColor *RSRandomColorOpaque(BOOL isOpaque) {
+UIColor *QPRandomColorOpaque(BOOL isOpaque) {
   /*
    From https://gist.github.com/kylefox/1689973
 

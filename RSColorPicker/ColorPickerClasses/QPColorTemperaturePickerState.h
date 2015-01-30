@@ -1,12 +1,12 @@
 //
-//  RSColorPickerState.h
-//  RSColorPicker
+//  QPColorTemperaturePickerState.h
+//  QPColorTemperaturePicker
 //
 //  Created by Alex Nichol on 12/16/13.
 //
 
 #import <Foundation/Foundation.h>
-#import "RSColorFunctions.h"
+#import "QPColorFunctions.h"
 
 /**
  * Represents the state of a color picker. This includes
@@ -18,7 +18,7 @@
  * "padding" - the amount of pixels on each side of the color picker
  *             reserved for padding
  */
-@interface RSColorPickerState : NSObject {
+@interface QPColorTemperaturePickerState : NSObject {
   CGPoint scaledRelativePoint; // H & S
   CGFloat brightness;          // V
   CGFloat alpha;               // A
@@ -31,9 +31,9 @@
  * by selecting `point` on a color picker of diameter `size` and padding
  * `padding`.
  */
-+ (RSColorPickerState *)stateForPoint:(CGPoint)point
-                                 size:(CGFloat)size
-                              padding:(CGFloat)padding;
++ (QPColorTemperaturePickerState *)stateForPoint:(CGPoint)point
+                                            size:(CGFloat)size
+                                         padding:(CGFloat)padding;
 
 /**
  * Create a state with a given color.
@@ -67,9 +67,10 @@
 - (CGPoint)selectionLocationWithSize:(CGFloat)size padding:(CGFloat)padding;
 
 // This class is immutable, so these are helpful!
-- (RSColorPickerState *)stateBySettingBrightness:(CGFloat)newBright;
-- (RSColorPickerState *)stateBySettingAlpha:(CGFloat)newAlpha;
-- (RSColorPickerState *)stateBySettingHue:(CGFloat)newHue;
-- (RSColorPickerState *)stateBySettingSaturation:(CGFloat)newSaturation;
+- (QPColorTemperaturePickerState *)stateBySettingBrightness:(CGFloat)newBright;
+- (QPColorTemperaturePickerState *)stateBySettingAlpha:(CGFloat)newAlpha;
+- (QPColorTemperaturePickerState *)stateBySettingHue:(CGFloat)newHue;
+- (QPColorTemperaturePickerState *)stateBySettingSaturation:
+        (CGFloat)newSaturation;
 
 @end

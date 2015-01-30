@@ -1,13 +1,13 @@
 //
 //  GenerateOperation.m
-//  RSColorPicker
+//  QPColorTemperaturePicker
 //
 //  Created by Ryan on 7/22/13.
 //
 
 #import "RSGenerateOperation.h"
-#import "ANImageBitmapRep.h"
-#import "RSColorFunctions.h"
+#import "QPImageBitmapRep.h"
+#import "QPColorFunctions.h"
 
 @implementation RSGenerateOperation
 
@@ -23,7 +23,7 @@
   BMPoint repSize = BMPointMake(_diameter, _diameter);
 
   // Create fresh
-  ANImageBitmapRep *rep = [[ANImageBitmapRep alloc] initWithSize:repSize];
+  QPImageBitmapRep *rep = [[QPImageBitmapRep alloc] initWithSize:repSize];
 
   CGFloat radius = _diameter / 2.0;
   CGFloat relRadius = radius - _padding;
@@ -69,7 +69,7 @@
       CGFloat perc_angle = angle / (2.0 * M_PI);
 
       CGFloat k = (1.0 - preComputeX[i] / radius) / 2.0;
-      BMPixel thisPixel = RSPixelFromHSV(perc_angle, r_distance / relRadius, 1,
+      BMPixel thisPixel = QPPixelFromHSV(perc_angle, r_distance / relRadius, 1,
                                          k); // full brightness
       [rep setPixel:thisPixel atPoint:BMPointMake(x, y)];
 
