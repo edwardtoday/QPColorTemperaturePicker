@@ -1,5 +1,5 @@
 //
-//  ANImageBitmapRep.h
+//  QPImageBitmapRep.h
 //  ImageManip
 //
 //  Created by Alex Nichol on 7/12/11.
@@ -11,7 +11,7 @@
 #import "BitmapCropManipulator.h"
 #import "BitmapRotationManipulator.h"
 #import "BitmapDrawManipulator.h"
-#import "UIImage+ANImageBitmapRep.h"
+#import "UIImage+QPImageBitmapRep.h"
 
 typedef struct {
   CGFloat red;
@@ -40,9 +40,9 @@ NSColor *NSColorFromBMPixel(BMPixel pixel);
 }
 
 #if __has_feature(objc_arc) == 1
-+ (ANImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize
++ (QPImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize
     __attribute__((ns_returns_autoreleased));
-+ (ANImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage
++ (QPImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage
     __attribute__((ns_returns_autoreleased));
 #else
 + (QPImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize;

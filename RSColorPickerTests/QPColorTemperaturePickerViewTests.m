@@ -239,7 +239,7 @@
 
 // TODO: test prepare methods
 
-#pragma mark - RSColorPickerView Delegates
+#pragma mark - QPColorTemperaturePickerView Delegates
 
 - (void)colorPickerDidChangeSelection:(QPColorTemperaturePickerView *)cp {
   NSLog(@"Got QPColorTemperaturePickerViewDelegate selection change callback");

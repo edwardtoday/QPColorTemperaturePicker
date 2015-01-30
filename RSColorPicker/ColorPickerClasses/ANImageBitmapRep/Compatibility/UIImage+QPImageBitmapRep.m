@@ -1,5 +1,5 @@
 //
-//  UIImage+ANImageBitmapRep.m
+//  UIImage+QPImageBitmapRep.m
 //  ImageBitmapRep
 //
 //  Created by Alex Nichol on 8/11/11.
@@ -10,10 +10,10 @@
 
 #if TARGET_OS_IPHONE
 
-#import "UIImage+ANImageBitmapRep.h"
+#import "UIImage+QPImageBitmapRep.h"
 #import "QPImageBitmapRep.h"
 
-@implementation UIImage (ANImageBitmapRep)
+@implementation UIImage (QPImageBitmapRep)
 
 
 + (UIImage *)imageFromImageBitmapRep:(QPImageBitmapRep *)ibr {
@@ -22,7 +22,7 @@
 
 - (QPImageBitmapRep *)imageBitmapRep {
 #if __has_feature(objc_arc) == 1
-    return [[ANImageBitmapRep alloc] initWithImage:self];
+    return [[QPImageBitmapRep alloc] initWithImage:self];
 #else
     return [[[QPImageBitmapRep alloc] initWithImage:self] autorelease];
 #endif

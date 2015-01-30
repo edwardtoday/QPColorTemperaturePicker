@@ -18,7 +18,7 @@
 /**
  * This class has several static methods for creating bitmap contexts.
  * These methods are pretty much only called when creating a new
- * ANImageBitmapRep.
+ * QPImageBitmapRep.
  */
 @interface CGContextCreator : NSObject {
     

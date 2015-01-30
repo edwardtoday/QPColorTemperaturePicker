@@ -1,5 +1,5 @@
 //
-//  NSImage+ANImageBitmapRep.m
+//  NSImage+QPImageBitmapRep.m
 //  ImageBitmapRep
 //
 //  Created by Alex Nichol on 10/23/11.
@@ -10,26 +10,26 @@
 
 #if TARGET_OS_IPHONE != 1
 
-#import "NSImage+ANImageBitmapRep.h"
-#import "ANImageBitmapRep.h"
+#import "NSImage+QPImageBitmapRep.h"
+#import "QPImageBitmapRep.h"
 
-@implementation NSImage (ANImageBitmapRep)
+@implementation NSImage (QPImageBitmapRep)
 
 
-+ (NSImage *)imageFromImageBitmapRep:(ANImageBitmapRep *)ibr {
++ (NSImage *)imageFromImageBitmapRep:(QPImageBitmapRep *)ibr {
     return [ibr image];
 }
 
-- (ANImageBitmapRep *)imageBitmapRep {
+- (QPImageBitmapRep *)imageBitmapRep {
 #if __has_feature(objc_arc) == 1
-    return [[ANImageBitmapRep alloc] initWithImage:self];
+    return [[QPImageBitmapRep alloc] initWithImage:self];
 #else
-    return [[[ANImageBitmapRep alloc] initWithImage:self] autorelease];
+    return [[[QPImageBitmapRep alloc] initWithImage:self] autorelease];
 #endif
 }
 
 - (NSImage *)imageByScalingToSize:(CGSize)sz {
-    ANImageBitmapRep * imageBitmap = [[ANImageBitmapRep alloc] initWithImage:self];
+    QPImageBitmapRep * imageBitmap = [[QPImageBitmapRep alloc] initWithImage:self];
     [imageBitmap setSize:BMPointMake(round(sz.width), round(sz.height))];
     NSImage * scaled = [imageBitmap image];
 #if __has_feature(objc_arc) != 1
@@ -39,7 +39,7 @@
 }
 
 - (NSImage *)imageFittingFrame:(CGSize)sz {
-    ANImageBitmapRep * imageBitmap = [[ANImageBitmapRep alloc] initWithImage:self];
+    QPImageBitmapRep * imageBitmap = [[QPImageBitmapRep alloc] initWithImage:self];
     [imageBitmap setSizeFittingFrame:BMPointMake(round(sz.width), round(sz.height))];
     NSImage * scaled = [imageBitmap image];
 #if __has_feature(objc_arc) != 1
@@ -49,7 +49,7 @@
 }
 
 - (NSImage *)imageFillingFrame:(CGSize)sz {
-    ANImageBitmapRep * imageBitmap = [[ANImageBitmapRep alloc] initWithImage:self];
+    QPImageBitmapRep * imageBitmap = [[QPImageBitmapRep alloc] initWithImage:self];
     [imageBitmap setSizeFillingFrame:BMPointMake(round(sz.width), round(sz.height))];
     NSImage * scaled = [imageBitmap image];
 #if __has_feature(objc_arc) != 1

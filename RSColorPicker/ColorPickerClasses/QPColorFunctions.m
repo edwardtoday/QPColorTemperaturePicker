@@ -157,7 +157,7 @@ UIColor *QPRandomColorOpaque(BOOL isOpaque) {
    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-   Alpha modifications for RSColorPicker test project
+   Alpha modifications for QPColorTemperaturePicker test project
    */
 
   CGFloat hue = (arc4random() % 256 / 256.0); //  0.0 to 1.0

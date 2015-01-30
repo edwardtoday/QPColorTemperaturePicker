@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'RSColorPicker' target in the 'RSColorPicker' project
+// Prefix header for all source files of the 'QPColorTemperaturePicker' target in the 'QPColorTemperaturePicker' project
 //
 
 #import <Availability.h>

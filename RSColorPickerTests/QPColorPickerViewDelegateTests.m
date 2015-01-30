@@ -49,7 +49,7 @@
   XCTAssertEqual(self.delegateDidChangeSelectionCalledCount, 1);
 }
 
-#pragma mark - RSColorPickerView Delegates
+#pragma mark - QPColorTemperaturePickerView Delegates
 
 - (void)colorPickerDidChangeSelection:(QPColorTemperaturePickerView *)cp {
   self.delegateDidChangeSelectionCalledCount++;

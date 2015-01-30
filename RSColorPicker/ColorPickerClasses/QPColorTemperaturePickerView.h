@@ -9,17 +9,17 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Accelerate/Accelerate.h>
 
-@class RSColorPickerView, BGRSLoupeLayer;
+@class QPColorTemperaturePickerView, BGRSLoupeLayer;
 
 @protocol QPColorTemperaturePickerViewDelegate <NSObject>
 /**
  * Called everytime the color picker's selection/color is changed.
  * Don't do expensive operations here as it will slow down your app.
  */
-- (void)colorPickerDidChangeSelection:(RSColorPickerView *)colorPicker;
+- (void)colorPickerDidChangeSelection:(QPColorTemperaturePickerView *)colorPicker;
 @optional
-- (void)colorPicker:(RSColorPickerView *)colorPicker touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void)colorPicker:(RSColorPickerView *)colorPicker touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)colorPicker:(QPColorTemperaturePickerView *)colorPicker touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)colorPicker:(QPColorTemperaturePickerView *)colorPicker touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 @end
 
 @interface QPColorTemperaturePickerView : UIView

@@ -100,7 +100,7 @@
   [self.view addSubview:_rgbLabel];
 }
 
-#pragma mark - RSColorPickerView delegate methods
+#pragma mark - QPColorTemperaturePickerView delegate methods
 
 - (void)colorPickerDidChangeSelection:(QPColorTemperaturePickerView *)cp {
 

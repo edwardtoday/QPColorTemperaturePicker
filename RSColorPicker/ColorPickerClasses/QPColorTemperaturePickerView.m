@@ -12,7 +12,7 @@
 #import "QPColorFunctions.h"
 #import "QPColorTemperaturePickerState.h"
 #import "QPColorTemperaturePickerView.h"
-#import "RSGenerateOperation.h"
+#import "QPGenerateOperation.h"
 #import "QPSelectionLayer.h"
 
 #define kSelectionViewSize 22
@@ -212,7 +212,7 @@
 }
 
 - (void)setFrame:(CGRect)frame {
-    NSAssert(frame.size.width == frame.size.height, @"RSColorPickerView must be square.");
+    NSAssert(frame.size.width == frame.size.height, @"QPColorTemperaturePickerView must be square.");
     [super setFrame:frame];
     [self resizeOrRescale];
 }
@@ -456,7 +456,7 @@ static dispatch_queue_t backgroundQueue;
     generatedBitmaps = [NSCache new];
     generateQueue = [NSOperationQueue new];
     generateQueue.maxConcurrentOperationCount = NSOperationQueueDefaultMaxConcurrentOperationCount;
-    backgroundQueue = dispatch_queue_create("com.github.rsully.rscolorpicker.background", DISPATCH_QUEUE_SERIAL);
+    backgroundQueue = dispatch_queue_create("com.github.rsully.QPColorTemperaturePicker.background", DISPATCH_QUEUE_SERIAL);
 }
 
 #pragma mark Background Methods

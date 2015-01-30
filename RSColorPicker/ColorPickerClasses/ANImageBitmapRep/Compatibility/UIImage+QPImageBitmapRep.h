@@ -1,5 +1,5 @@
 //
-//  UIImage+ANImageBitmapRep.h
+//  UIImage+QPImageBitmapRep.h
 //  ImageBitmapRep
 //
 //  Created by Alex Nichol on 8/11/11.
@@ -14,11 +14,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImage (ANImageBitmapRep)
+@interface UIImage (QPImageBitmapRep)
 
 #if __has_feature(objc_arc) == 1
-+ (UIImage *)imageFromImageBitmapRep:(ANImageBitmapRep *)ibr __attribute__((ns_returns_autoreleased));
-- (ANImageBitmapRep *)imageBitmapRep __attribute__((ns_returns_autoreleased));
++ (UIImage *)imageFromImageBitmapRep:(QPImageBitmapRep *)ibr __attribute__((ns_returns_autoreleased));
+- (QPImageBitmapRep *)imageBitmapRep __attribute__((ns_returns_autoreleased));
 - (UIImage *)imageByScalingToSize:(CGSize)sz __attribute__((ns_returns_autoreleased));
 - (UIImage *)imageFittingFrame:(CGSize)sz __attribute__((ns_returns_autoreleased));
 - (UIImage *)imageFillingFrame:(CGSize)sz __attribute__((ns_returns_autoreleased));

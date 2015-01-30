@@ -11,16 +11,16 @@
 
 @interface BitmapContextManipulator : NSObject <BitmapContextRep> {
 #if __has_feature(objc_arc) == 1
-    __unsafe_unretained BitmapContextRep * bitmapContext;
+  __unsafe_unretained QPBitmapContextRep *bitmapContext;
 #else
-    QPBitmapContextRep * bitmapContext;
+  QPBitmapContextRep *bitmapContext;
 #endif
 }
 
 #if __has_feature(objc_arc) == 1
-@property (nonatomic, assign) BitmapContextRep * bitmapContext;
+@property(nonatomic, assign) QPBitmapContextRep *bitmapContext;
 #else
-@property (nonatomic, assign) QPBitmapContextRep * bitmapContext;
+@property(nonatomic, assign) QPBitmapContextRep *bitmapContext;
 #endif
 
 - (id)initWithContext:(QPBitmapContextRep *)aContext;

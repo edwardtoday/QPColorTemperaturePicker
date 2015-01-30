@@ -1,5 +1,5 @@
 //
-//  ANImageBitmapRep.m
+//  QPImageBitmapRep.m
 //  ImageManip
 //
 //  Created by Alex Nichol on 7/12/11.
@@ -66,13 +66,13 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
 }
 
 #if __has_feature(objc_arc) == 1
-+ (ANImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize {
-  return [[ANImageBitmapRep alloc]
++ (QPImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize {
+  return [[QPImageBitmapRep alloc]
       initWithSize:BMPointMake(round(avgSize.width), round(avgSize.height))];
 }
 
-+ (ANImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage {
-  return [[ANImageBitmapRep alloc] initWithImage:anImage];
++ (QPImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage {
+  return [[QPImageBitmapRep alloc] initWithImage:anImage];
 }
 #else
 + (QPImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize {

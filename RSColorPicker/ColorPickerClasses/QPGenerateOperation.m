@@ -5,7 +5,7 @@
 //  Created by Ryan on 7/22/13.
 //
 
-#import "RSGenerateOperation.h"
+#import "QPGenerateOperation.h"
 #import "QPImageBitmapRep.h"
 #import "QPColorFunctions.h"
 
