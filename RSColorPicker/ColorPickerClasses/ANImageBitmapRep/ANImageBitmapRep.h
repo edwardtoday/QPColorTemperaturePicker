@@ -14,30 +14,36 @@
 #import "UIImage+ANImageBitmapRep.h"
 
 typedef struct {
-    CGFloat red;
-    CGFloat green;
-    CGFloat blue;
-    CGFloat alpha;
+  CGFloat red;
+  CGFloat green;
+  CGFloat blue;
+  CGFloat alpha;
 } BMPixel;
 
-BMPixel BMPixelMake (CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha);
+BMPixel BMPixelMake(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha,
+                    CGFloat k);
 #if TARGET_OS_IPHONE
-UIColor * UIColorFromBMPixel (BMPixel pixel);
+UIColor *UIColorFromBMPixel(BMPixel pixel);
 #elif TARGET_OS_MAC
-NSColor * NSColorFromBMPixel (BMPixel pixel);
+NSColor *NSColorFromBMPixel(BMPixel pixel);
 #endif
 
-@interface ANImageBitmapRep : BitmapContextRep <BitmapScaleManipulator, BitmapCropManipulator, BitmapRotationManipulator, BitmapDrawManipulator, NSCopying> {
+@interface ANImageBitmapRep
+    : BitmapContextRep <BitmapScaleManipulator, BitmapCropManipulator,
+                        BitmapRotationManipulator, BitmapDrawManipulator,
+                        NSCopying> {
 #if __has_feature(objc_arc) == 1
-    __strong NSArray * baseClasses;
+  __strong NSArray *baseClasses;
 #else
-    NSArray * baseClasses;
+  NSArray *baseClasses;
 #endif
 }
 
 #if __has_feature(objc_arc) == 1
-+ (ANImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize __attribute__((ns_returns_autoreleased));
-+ (ANImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage __attribute__((ns_returns_autoreleased));
++ (ANImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize
+    __attribute__((ns_returns_autoreleased));
++ (ANImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage
+    __attribute__((ns_returns_autoreleased));
 #else
 + (ANImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize;
 + (ANImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage;
@@ -75,7 +81,7 @@ NSColor * NSColorFromBMPixel (BMPixel pixel);
 /**
  * Sets a pixel at a specific location.
  * @param pixel An RGBA pixel represented by an array of four floats.
- * Each component is one float long, and goes from 0 to 1.  
+ * Each component is one float long, and goes from 0 to 1.
  * In this case, 0 is black and 1 is white.
  * @param point The location of the pixel to change.  For all points
  * in a BitmapContextRep, the x and y values start at 0 and end at

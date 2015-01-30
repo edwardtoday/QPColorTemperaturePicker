@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "ANImageBitmapRep.h"
 
-BMPixel RSPixelFromHSV(CGFloat H, CGFloat S, CGFloat V);
+BMPixel RSPixelFromHSV(CGFloat H, CGFloat S, CGFloat V,CGFloat k);
 void RSHSVFromPixel(BMPixel pixel, CGFloat *h, CGFloat *s, CGFloat *v);
 
 // four floats will be placed into `components`
