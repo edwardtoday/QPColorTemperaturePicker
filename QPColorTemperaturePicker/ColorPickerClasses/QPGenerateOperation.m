@@ -9,7 +9,7 @@
 #import "QPImageBitmapRep.h"
 #import "QPColorFunctions.h"
 
-@implementation RSGenerateOperation
+@implementation QPGenerateOperation
 
 - (id)initWithDiameter:(CGFloat)diameter andPadding:(CGFloat)padding {
   if ((self = [self init])) {
