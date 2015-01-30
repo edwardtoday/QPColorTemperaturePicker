@@ -6,7 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "BitmapRotationManipulator.h"
+#import "QPBitmapRotationManipulator.h"
 
 #define DEGTORAD(x) (x * (M_PI / 180.0f))
 
@@ -17,7 +17,7 @@ static CGPoint locationForAngle (CGFloat angle, CGFloat hypotenuse) {
     return p;
 }
 
-@implementation BitmapRotationManipulator
+@implementation QPBitmapRotationManipulator
 
 - (void)rotate:(CGFloat)degrees {
     if (degrees == 0) return;
@@ -72,7 +72,7 @@ static CGPoint locationForAngle (CGFloat angle, CGFloat hypotenuse) {
     offsetCenter.x = (float)((float)newSize.width / 2.0f) - (float)newCenter.x;
     offsetCenter.y = (float)((float)newSize.height / 2.0f) - (float)newCenter.y;
     
-    CGContextRef newContext = [CGContextCreator newARGBBitmapContextWithSize:newSize];
+    CGContextRef newContext = [QPCGContextCreator newARGBBitmapContextWithSize:newSize];
     CGContextSaveGState(newContext);
     CGContextTranslateCTM(newContext, (float)round((float)offsetCenter.x), (float)round((float)offsetCenter.y));
     
@@ -141,7 +141,7 @@ static CGPoint locationForAngle (CGFloat angle, CGFloat hypotenuse) {
     offsetCenter.x = (float)((float)newSize.width / 2.0f) - (float)newCenter.x;
     offsetCenter.y = (float)((float)newSize.height / 2.0f) - (float)newCenter.y;
     
-    CGContextRef newContext = [CGContextCreator newARGBBitmapContextWithSize:newSize];
+    CGContextRef newContext = [QPCGContextCreator newARGBBitmapContextWithSize:newSize];
     CGContextSaveGState(newContext);
     CGContextTranslateCTM(newContext, (float)round((float)offsetCenter.x), (float)round((float)offsetCenter.y));
     

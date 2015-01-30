@@ -6,11 +6,11 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "OSCommonImage.h"
-#import "BitmapScaleManipulator.h"
-#import "BitmapCropManipulator.h"
-#import "BitmapRotationManipulator.h"
-#import "BitmapDrawManipulator.h"
+#import "QPCommonImage.h"
+#import "QPBitmapScaleManipulator.h"
+#import "QPBitmapCropManipulator.h"
+#import "QPBitmapRotationManipulator.h"
+#import "QPBitmapDrawManipulator.h"
 #import "UIImage+QPImageBitmapRep.h"
 
 typedef struct {
@@ -29,9 +29,9 @@ NSColor *NSColorFromBMPixel(BMPixel pixel);
 #endif
 
 @interface QPImageBitmapRep
-    : QPBitmapContextRep <BitmapScaleManipulator, BitmapCropManipulator,
-                        BitmapRotationManipulator, BitmapDrawManipulator,
-                        NSCopying> {
+    : QPBitmapContextRep <QPBitmapScaleManipulator, QPBitmapCropManipulator,
+                          QPBitmapRotationManipulator, QPBitmapDrawManipulator,
+                          NSCopying> {
 #if __has_feature(objc_arc) == 1
   __strong NSArray *baseClasses;
 #else
@@ -42,11 +42,11 @@ NSColor *NSColorFromBMPixel(BMPixel pixel);
 #if __has_feature(objc_arc) == 1
 + (QPImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize
     __attribute__((ns_returns_autoreleased));
-+ (QPImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage
++ (QPImageBitmapRep *)imageBitmapRepWithImage:(QPImageObj *)anImage
     __attribute__((ns_returns_autoreleased));
 #else
 + (QPImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize;
-+ (QPImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage;
++ (QPImageBitmapRep *)imageBitmapRepWithImage:(QPImageObj *)anImage;
 #endif
 
 /**
@@ -93,9 +93,9 @@ NSColor *NSColorFromBMPixel(BMPixel pixel);
  * Creates a new UIImage or NSImage from the bitmap context.
  */
 #if __has_feature(objc_arc) == 1
-- (ANImageObj *)image __attribute__((ns_returns_autoreleased));
+- (QPImageObj *)image __attribute__((ns_returns_autoreleased));
 #else
-- (ANImageObj *)image;
+- (QPImageObj *)image;
 #endif
 
 @end

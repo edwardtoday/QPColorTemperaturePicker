@@ -33,7 +33,7 @@
 
 @class QPColorTemperaturePickerView;
 
-@interface BGRSLoupeLayer : CALayer {
+@interface QPBGRSLoupeLayer : CALayer {
     BOOL isReadyToDismiss;
     BOOL isRunningInitialAnimation;
 }

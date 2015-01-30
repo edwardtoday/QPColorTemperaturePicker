@@ -10,17 +10,17 @@
 #define ImageBitmapRep_OSCommonImage_h
 
 #import "TargetConditionals.h"
-#import "CGImageContainer.h"
+#import "QPCGImageContainer.h"
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-typedef UIImage ANImageObj;
+typedef UIImage QPImageObj;
 #elif TARGET_OS_MAC
 #import <Cocoa/Cocoa.h>
-typedef NSImage ANImageObj;
+typedef NSImage QPImageObj;
 #endif
 
-CGImageRef CGImageFromANImage (ANImageObj * anImageObj);
-ANImageObj * ANImageFromCGImage (CGImageRef imageRef);
+CGImageRef CGImageFromANImage(QPImageObj *QPImageObj);
+QPImageObj *QPImageFromCGImage(CGImageRef imageRef);
 
 #endif

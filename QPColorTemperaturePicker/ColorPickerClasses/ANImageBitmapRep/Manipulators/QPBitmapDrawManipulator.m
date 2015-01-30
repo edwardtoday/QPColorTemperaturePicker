@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "BitmapDrawManipulator.h"
+#import "QPBitmapDrawManipulator.h"
 
-@implementation BitmapDrawManipulator
+@implementation QPBitmapDrawManipulator
 
 - (void)drawImage:(CGImageRef)image inRect:(CGRect)rect {
     BMPoint size = [bitmapContext bitmapSize];

@@ -56,7 +56,7 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
   if (!baseClasses)
     [self generateBaseClasses];
   for (int i = 0; i < [baseClasses count]; i++) {
-    BitmapContextManipulator *manip = [baseClasses objectAtIndex:i];
+    QPBitmapContextManipulator *manip = [baseClasses objectAtIndex:i];
     if ([manip respondsToSelector:[anInvocation selector]]) {
       [anInvocation invokeWithTarget:manip];
       return;
@@ -71,7 +71,7 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
       initWithSize:BMPointMake(round(avgSize.width), round(avgSize.height))];
 }
 
-+ (QPImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage {
++ (QPImageBitmapRep *)imageBitmapRepWithImage:(QPImageObj *)anImage {
   return [[QPImageBitmapRep alloc] initWithImage:anImage];
 }
 #else
@@ -81,7 +81,7 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
                                round(avgSize.height))] autorelease];
 }
 
-+ (QPImageBitmapRep *)imageBitmapRepWithImage:(ANImageObj *)anImage {
++ (QPImageBitmapRep *)imageBitmapRepWithImage:(QPImageObj *)anImage {
   return [[[QPImageBitmapRep alloc] initWithImage:anImage] autorelease];
 }
 #endif
@@ -161,8 +161,8 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
   [self setRawPixel:rawPixel atPoint:point];
 }
 
-- (ANImageObj *)image {
-  return ANImageFromCGImage([self CGImage]);
+- (QPImageObj *)image {
+  return QPImageFromCGImage([self CGImage]);
 }
 
 #if __has_feature(objc_arc) != 1
@@ -175,14 +175,14 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
 #pragma mark Base Classes
 
 - (void)generateBaseClasses {
-  BitmapCropManipulator *croppable =
-      [[BitmapCropManipulator alloc] initWithContext:self];
-  BitmapScaleManipulator *scalable =
-      [[BitmapScaleManipulator alloc] initWithContext:self];
-  BitmapRotationManipulator *rotatable =
-      [[BitmapRotationManipulator alloc] initWithContext:self];
-  BitmapDrawManipulator *drawable =
-      [[BitmapDrawManipulator alloc] initWithContext:self];
+  QPBitmapCropManipulator *croppable =
+      [[QPBitmapCropManipulator alloc] initWithContext:self];
+  QPBitmapScaleManipulator *scalable =
+      [[QPBitmapScaleManipulator alloc] initWithContext:self];
+  QPBitmapRotationManipulator *rotatable =
+      [[QPBitmapRotationManipulator alloc] initWithContext:self];
+  QPBitmapDrawManipulator *drawable =
+      [[QPBitmapDrawManipulator alloc] initWithContext:self];
   baseClasses = [[NSArray alloc]
       initWithObjects:croppable, scalable, rotatable, drawable, nil];
 #if __has_feature(objc_arc) != 1

@@ -6,9 +6,9 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "OSCommonImage.h"
-#import "CGImageContainer.h"
-#import "CGContextCreator.h"
+#import "QPCommonImage.h"
+#import "QPCGImageContainer.h"
+#import "QPCGContextCreator.h"
 
 /**
  * A structure that defines a point in bitmap space.
@@ -40,7 +40,7 @@ BMPoint BMPointFromPoint(CGPoint point);
  * Creates a bitmap context with pixels and dimensions from an image.
  * @param image The image to wrap in a bitmap context.
  */
-- (id)initWithImage:(ANImageObj *)image;
+- (id)initWithImage:(QPImageObj *)image;
 
 /**
  * Creates a bitmap context with the information from a CGImageRef.

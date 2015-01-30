@@ -20,7 +20,7 @@
  * These methods are pretty much only called when creating a new
  * QPImageBitmapRep.
  */
-@interface CGContextCreator : NSObject {
+@interface QPCGContextCreator : NSObject {
     
 }
 

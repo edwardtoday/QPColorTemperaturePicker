@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BitmapContextManipulator.h"
+#import "QPBitmapContextManipulator.h"
 
-@protocol BitmapCropManipulator
+@protocol QPBitmapCropManipulator
 
 @optional
 - (void)cropFrame:(CGRect)frame;
@@ -19,7 +19,7 @@
 
 @end
 
-@interface BitmapCropManipulator : BitmapContextManipulator {
+@interface QPBitmapCropManipulator : QPBitmapContextManipulator {
     
 }
 

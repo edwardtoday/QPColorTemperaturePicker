@@ -6,9 +6,9 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "BitmapContextManipulator.h"
+#import "QPBitmapContextManipulator.h"
 
-@implementation BitmapContextManipulator
+@implementation QPBitmapContextManipulator
 
 @synthesize bitmapContext;
 

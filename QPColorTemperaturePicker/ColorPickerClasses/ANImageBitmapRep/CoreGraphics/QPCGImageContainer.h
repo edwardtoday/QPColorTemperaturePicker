@@ -17,14 +17,14 @@
 
 #if __has_feature(objc_arc) != 1
 
-@interface CGImageContainer : NSObject {
-    CGImageRef image;
+@interface QPCGImageContainer : NSObject {
+  CGImageRef image;
 }
 
 /**
  * The image that this container encloses.
  */
-@property (readonly) CGImageRef image;
+@property(readonly) CGImageRef image;
 
 /**
  * Create a new image container with an image.
@@ -49,6 +49,7 @@
 
 #else
 
-id CGImageReturnAutoreleased (CGImageRef original) __attribute__((ns_returns_autoreleased));
+id CGImageReturnAutoreleased(CGImageRef original)
+    __attribute__((ns_returns_autoreleased));
 
 #endif

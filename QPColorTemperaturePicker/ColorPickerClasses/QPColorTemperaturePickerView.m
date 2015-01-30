@@ -7,7 +7,7 @@
 
 #import "QPImageBitmapRep.h"
 
-#import "BGRSLoupeLayer.h"
+#import "QPBGRSLoupeLayer.h"
 #import "QPColorFunctions.h"
 #import "QPColorTemperaturePickerState.h"
 #import "QPColorTemperaturePickerView.h"
@@ -67,7 +67,7 @@
  */
 @property(nonatomic) CALayer *contentsLayer;
 
-@property(nonatomic) BGRSLoupeLayer *loupeLayer;
+@property(nonatomic) QPBGRSLoupeLayer *loupeLayer;
 
 /**
  * Gets updated to the scale of the current UIWindow.
@@ -433,7 +433,7 @@
   if (self.showLoupe) {
     // Lazily load loupeLayer, if user wants to display it.
     if (!self.loupeLayer) {
-      self.loupeLayer = [BGRSLoupeLayer layer];
+      self.loupeLayer = [QPBGRSLoupeLayer layer];
       self.loupeLayer.contentsScale = self.scale;
     }
     [self.loupeLayer appearInColorPicker:self];

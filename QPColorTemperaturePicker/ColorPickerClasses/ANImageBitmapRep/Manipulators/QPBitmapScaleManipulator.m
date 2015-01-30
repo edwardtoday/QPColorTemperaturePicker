@@ -6,13 +6,13 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "BitmapScaleManipulator.h"
+#import "QPBitmapScaleManipulator.h"
 
 
-@implementation BitmapScaleManipulator
+@implementation QPBitmapScaleManipulator
 
 - (void)setSize:(BMPoint)aSize {
-    CGContextRef newContext = [CGContextCreator newARGBBitmapContextWithSize:CGSizeMake(aSize.x, aSize.y)];
+    CGContextRef newContext = [QPCGContextCreator newARGBBitmapContextWithSize:CGSizeMake(aSize.x, aSize.y)];
     CGImageRef image = [bitmapContext CGImage];
     CGContextDrawImage(newContext, CGRectMake(0, 0, aSize.x, aSize.y), image);
     [bitmapContext setContext:newContext];
@@ -35,7 +35,7 @@
     
     CGSize newContentSize = CGSizeMake(oldSize.width * scaleRatio, oldSize.height * scaleRatio);
     CGImageRef image = [bitmapContext CGImage];
-    CGContextRef newContext = [CGContextCreator newARGBBitmapContextWithSize:CGSizeMake(aSize.x, aSize.y)];
+    CGContextRef newContext = [QPCGContextCreator newARGBBitmapContextWithSize:CGSizeMake(aSize.x, aSize.y)];
     CGContextDrawImage(newContext, CGRectMake(newSize.width / 2 - (newContentSize.width / 2),
                                               newSize.height / 2 - (newContentSize.height / 2),
                                               newContentSize.width, newContentSize.height), image);
@@ -59,7 +59,7 @@
     
     CGSize newContentSize = CGSizeMake(oldSize.width * scaleRatio, oldSize.height * scaleRatio);
     CGImageRef image = [bitmapContext CGImage];
-    CGContextRef newContext = [CGContextCreator newARGBBitmapContextWithSize:CGSizeMake(aSize.x, aSize.y)];
+    CGContextRef newContext = [QPCGContextCreator newARGBBitmapContextWithSize:CGSizeMake(aSize.x, aSize.y)];
     CGContextDrawImage(newContext, CGRectMake(newSize.width / 2 - (newContentSize.width / 2),
                                               newSize.height / 2 - (newContentSize.height / 2),
                                               newContentSize.width, newContentSize.height), image);

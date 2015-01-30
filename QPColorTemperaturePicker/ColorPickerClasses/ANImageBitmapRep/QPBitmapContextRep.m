@@ -25,10 +25,10 @@ BMPoint BMPointFromPoint(CGPoint point) {
 
 @implementation QPBitmapContextRep
 
-- (id)initWithImage:(ANImageObj *)image {
+- (id)initWithImage:(QPImageObj *)image {
   if ((self = [super init])) {
     CGImageRef img = CGImageFromANImage(image);
-    context = [CGContextCreator newARGBBitmapContextWithImage:img];
+    context = [QPCGContextCreator newARGBBitmapContextWithImage:img];
     bitmapData = CGBitmapContextGetData(context);
     lastImage = CGImageRetain(img);
   }
@@ -37,7 +37,7 @@ BMPoint BMPointFromPoint(CGPoint point) {
 
 - (id)initWithCGImage:(CGImageRef)img {
   if ((self = [super init])) {
-    context = [CGContextCreator newARGBBitmapContextWithImage:img];
+    context = [QPCGContextCreator newARGBBitmapContextWithImage:img];
     bitmapData = CGBitmapContextGetData(context);
     lastImage = CGImageRetain(img);
   }
@@ -54,7 +54,7 @@ BMPoint BMPointFromPoint(CGPoint point) {
       return nil;
 #endif
     }
-    context = [CGContextCreator
+    context = [QPCGContextCreator
         newARGBBitmapContextWithSize:CGSizeMake(sizePoint.x, sizePoint.y)];
     bitmapData = CGBitmapContextGetData(context);
     lastImage = CGBitmapContextCreateImage(context);

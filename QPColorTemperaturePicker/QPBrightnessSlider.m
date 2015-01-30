@@ -7,7 +7,7 @@
 
 #import "QPBrightnessSlider.h"
 
-#import "CGContextCreator.h"
+#import "QPCGContextCreator.h"
 
 /**
  * Returns Image with hourglass looking slider that looks something like:
@@ -28,7 +28,7 @@ UIImage *QPHourGlassThumbImage(CGSize size, CGFloat cWidth) {
   CGFloat height = size.height;
 
   // Setup Context
-  CGContextRef ctx = [CGContextCreator newARGBBitmapContextWithSize:size];
+  CGContextRef ctx = [QPCGContextCreator newARGBBitmapContextWithSize:size];
 
   // Set Colors
   CGContextSetFillColorWithColor(ctx, [UIColor blackColor].CGColor);
@@ -86,7 +86,7 @@ UIImage *QPArrowLoopThumbImage(CGSize size, CGSize loopSize) {
   insideRect.origin.y = (size.height - loopSize.height) / 2;
 
   // Setup Context
-  CGContextRef ctx = [CGContextCreator newARGBBitmapContextWithSize:size];
+  CGContextRef ctx = [QPCGContextCreator newARGBBitmapContextWithSize:size];
 
   // Set Colors
   CGContextSetFillColorWithColor(ctx, [UIColor blackColor].CGColor);

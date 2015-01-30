@@ -6,10 +6,10 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "CGContextCreator.h"
+#import "QPCGContextCreator.h"
 
 
-@implementation CGContextCreator
+@implementation QPCGContextCreator
 
 - (id)init {
     if ((self = [super init])) {

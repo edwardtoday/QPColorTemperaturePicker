@@ -28,10 +28,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "BGRSLoupeLayer.h"
+#import "QPBGRSLoupeLayer.h"
 #import "QPColorTemperaturePickerView.h"
 
-@interface BGRSLoupeLayer ()
+@interface QPBGRSLoupeLayer ()
 
 @property (nonatomic) struct CGPath *gridCirclePath;
 
@@ -41,7 +41,7 @@
 @end
 
 
-@implementation BGRSLoupeLayer
+@implementation QPBGRSLoupeLayer
 
 @synthesize loupeCenter, colorPicker;
 

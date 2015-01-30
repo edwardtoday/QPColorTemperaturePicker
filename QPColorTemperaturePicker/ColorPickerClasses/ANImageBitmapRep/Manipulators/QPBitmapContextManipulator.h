@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "QPBitmapContextRep.h"
 
-@interface BitmapContextManipulator : NSObject <BitmapContextRep> {
+@interface QPBitmapContextManipulator : NSObject <BitmapContextRep> {
 #if __has_feature(objc_arc) == 1
   __unsafe_unretained QPBitmapContextRep *bitmapContext;
 #else

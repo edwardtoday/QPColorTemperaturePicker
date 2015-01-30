@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BitmapContextManipulator.h"
+#import "QPBitmapContextManipulator.h"
 
-@protocol BitmapRotationManipulator
+@protocol QPBitmapRotationManipulator
 
 @optional
 - (void)rotate:(CGFloat)degrees;
@@ -17,7 +17,7 @@
 
 @end
 
-@interface BitmapRotationManipulator : BitmapContextManipulator {
+@interface QPBitmapRotationManipulator : QPBitmapContextManipulator {
     
 }
 

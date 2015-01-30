@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BitmapContextManipulator.h"
+#import "QPBitmapContextManipulator.h"
 
-@protocol BitmapScaleManipulator <NSObject>
+@protocol QPBitmapScaleManipulator <NSObject>
 
 @optional
 - (void)setSize:(BMPoint)aSize;
@@ -18,8 +18,7 @@
 
 @end
 
-@interface BitmapScaleManipulator : BitmapContextManipulator {
-    
+@interface QPBitmapScaleManipulator : QPBitmapContextManipulator {
 }
 
 /**
@@ -31,9 +30,11 @@
 - (void)setSize:(BMPoint)aSize;
 
 /**
- * Scales the image to fit a particular frame without stretching (bringing out of scale).
+ * Scales the image to fit a particular frame without stretching (bringing out
+ * of scale).
  * @param aSize The size to which the image scaled.
- * @discussion The actual image itself will most likely be smaller than the specified
+ * @discussion The actual image itself will most likely be smaller than the
+ * specified
  * size, leaving transparent edges to make the image fit the exact size.
  */
 - (void)setSizeFittingFrame:(BMPoint)aSize;
