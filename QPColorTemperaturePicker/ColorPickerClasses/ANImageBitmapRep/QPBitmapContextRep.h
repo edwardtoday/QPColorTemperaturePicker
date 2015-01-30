@@ -20,9 +20,9 @@ typedef struct {
   long y;
 } BMPoint;
 
-BMPoint BMPointMake(long x, long y);
-BMPoint BMPointFromSize(CGSize size);
-BMPoint BMPointFromPoint(CGPoint point);
+BMPoint QPBMPointMake(long x, long y);
+BMPoint QPBMPointFromSize(CGSize size);
+BMPoint QPBMPointFromPoint(CGPoint point);
 
 /**
  * BitmapContextRep is a concrete subclass of NSObject that provides a basic

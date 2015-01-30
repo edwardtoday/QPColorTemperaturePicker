@@ -46,7 +46,7 @@
 - (void)testHSVFromPixel {
   // Not really needed yet, since we're using Apple's implementation
 
-  BMPixel pixel = BMPixelMake(0, 0, 0, 1.0, 1);
+  BMPixel pixel = QPBMPixelMake(0, 0, 0, 1.0, 1);
   CGFloat h, s, v;
 
   QPHSVFromPixel(pixel, &h, &s, &v);

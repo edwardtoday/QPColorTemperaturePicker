@@ -30,7 +30,7 @@
 
 - (UIImage *)imageByScalingToSize:(CGSize)sz {
     QPImageBitmapRep * imageBitmap = [[QPImageBitmapRep alloc] initWithImage:self];
-    [imageBitmap setSize:BMPointMake(round(sz.width), round(sz.height))];
+    [imageBitmap setSize:QPBMPointMake(round(sz.width), round(sz.height))];
     UIImage * scaled = [imageBitmap image];
 #if __has_feature(objc_arc) != 1
     [imageBitmap release];
@@ -40,7 +40,7 @@
 
 - (UIImage *)imageFittingFrame:(CGSize)sz {
     QPImageBitmapRep * imageBitmap = [[QPImageBitmapRep alloc] initWithImage:self];
-    [imageBitmap setSizeFittingFrame:BMPointMake(round(sz.width), round(sz.height))];
+    [imageBitmap setSizeFittingFrame:QPBMPointMake(round(sz.width), round(sz.height))];
     UIImage * scaled = [imageBitmap image];
 #if __has_feature(objc_arc) != 1
     [imageBitmap release];
@@ -50,7 +50,7 @@
 
 - (UIImage *)imageFillingFrame:(CGSize)sz {
     QPImageBitmapRep * imageBitmap = [[QPImageBitmapRep alloc] initWithImage:self];
-    [imageBitmap setSizeFillingFrame:BMPointMake(round(sz.width), round(sz.height))];
+    [imageBitmap setSizeFillingFrame:QPBMPointMake(round(sz.width), round(sz.height))];
     UIImage * scaled = [imageBitmap image];
 #if __has_feature(objc_arc) != 1
     [imageBitmap release];

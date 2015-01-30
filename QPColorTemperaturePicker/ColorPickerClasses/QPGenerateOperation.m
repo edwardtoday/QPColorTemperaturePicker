@@ -20,7 +20,7 @@
 }
 
 - (void)main {
-  BMPoint repSize = BMPointMake(_diameter, _diameter);
+  BMPoint repSize = QPBMPointMake(_diameter, _diameter);
 
   // Create fresh
   QPImageBitmapRep *rep = [[QPImageBitmapRep alloc] initWithSize:repSize];
@@ -71,7 +71,7 @@
       CGFloat k = (1.0 - preComputeX[i] / radius) / 2.0;
       BMPixel thisPixel = QPPixelFromHSV(perc_angle, r_distance / relRadius, 1,
                                          k); // full brightness
-      [rep setPixel:thisPixel atPoint:BMPointMake(x, y)];
+      [rep setPixel:thisPixel atPoint:QPBMPointMake(x, y)];
 
       i++;
     }

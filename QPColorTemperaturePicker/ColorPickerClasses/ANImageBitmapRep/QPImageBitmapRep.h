@@ -20,7 +20,7 @@ typedef struct {
   CGFloat alpha;
 } BMPixel;
 
-BMPixel BMPixelMake(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha,
+BMPixel QPBMPixelMake(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha,
                     CGFloat k);
 #if TARGET_OS_IPHONE
 UIColor *UIColorFromBMPixel(BMPixel pixel);

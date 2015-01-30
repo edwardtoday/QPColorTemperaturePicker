@@ -8,8 +8,8 @@
 
 #import "QPImageBitmapRep.h"
 
-BMPixel BMPixelMake(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha,
-                    CGFloat k) {
+BMPixel QPBMPixelMake(CGFloat red, CGFloat green, CGFloat blue, CGFloat alpha,
+                      CGFloat k) {
   BMPixel pixel;
 
   if (red < 0 || green < 0 || blue < 0) {
@@ -68,7 +68,7 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
 #if __has_feature(objc_arc) == 1
 + (QPImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize {
   return [[QPImageBitmapRep alloc]
-      initWithSize:BMPointMake(round(avgSize.width), round(avgSize.height))];
+      initWithSize:QPBMPointMake(round(avgSize.width), round(avgSize.height))];
 }
 
 + (QPImageBitmapRep *)imageBitmapRepWithImage:(QPImageObj *)anImage {
@@ -77,8 +77,8 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
 #else
 + (QPImageBitmapRep *)imageBitmapRepWithCGSize:(CGSize)avgSize {
   return [[[QPImageBitmapRep alloc]
-      initWithSize:BMPointMake(round(avgSize.width),
-                               round(avgSize.height))] autorelease];
+      initWithSize:QPBMPointMake(round(avgSize.width),
+                                 round(avgSize.height))] autorelease];
 }
 
 + (QPImageBitmapRep *)imageBitmapRepWithImage:(QPImageObj *)anImage {
@@ -91,11 +91,11 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
   BMPoint size = [self bitmapSize];
   for (long y = 0; y < size.y; y++) {
     for (long x = 0; x < size.x; x++) {
-      [self getRawPixel:pixel atPoint:BMPointMake(x, y)];
+      [self getRawPixel:pixel atPoint:QPBMPointMake(x, y)];
       pixel[0] = 255 - pixel[0];
       pixel[1] = 255 - pixel[1];
       pixel[2] = 255 - pixel[2];
-      [self setRawPixel:pixel atPoint:BMPointMake(x, y)];
+      [self setRawPixel:pixel atPoint:QPBMPointMake(x, y)];
     }
   }
 }
@@ -107,7 +107,7 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
   CGSize cSize = CGSizeMake((CGFloat)([self bitmapSize].x) * quality,
                             (CGFloat)([self bitmapSize].y) * quality);
   BMPoint oldSize = [self bitmapSize];
-  [self setSize:BMPointMake(round(cSize.width), round(cSize.height))];
+  [self setSize:QPBMPointMake(round(cSize.width), round(cSize.height))];
   [self setSize:oldSize];
 }
 
@@ -117,7 +117,7 @@ NSColor *NSColorFromBMPixel(BMPixel pixel) {
   BMPoint size = [self bitmapSize];
   for (long y = 0; y < size.y; y++) {
     for (long x = 0; x < size.x; x++) {
-      BMPoint point = BMPointMake(x, y);
+      BMPoint point = QPBMPointMake(x, y);
       BMPixel pixel = [self getPixelAtPoint:point];
       pixel.red *= brightness;
       pixel.green *= brightness;

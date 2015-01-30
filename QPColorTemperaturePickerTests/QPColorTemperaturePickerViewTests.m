@@ -157,7 +157,7 @@
   CGFloat newColorH, newColorS, newColorV;
   CGFloat newColorComponents[4];
   QPGetComponentsForColor(newColorComponents, newColor);
-  QPHSVFromPixel(BMPixelMake(newColorComponents[0], newColorComponents[1],
+  QPHSVFromPixel(QPBMPixelMake(newColorComponents[0], newColorComponents[1],
                              newColorComponents[2], newColorComponents[3]),
                  &newColorH, &newColorS, &newColorV);
   self.colorPicker.brightness = newColorV;
@@ -198,7 +198,7 @@
   CGFloat newColorH, newColorS, newColorV;
   CGFloat newColorComponents[4];
   QPGetComponentsForColor(newColorComponents, newColor);
-  QPHSVFromPixel(BMPixelMake(newColorComponents[0], newColorComponents[1],
+  QPHSVFromPixel(QPBMPixelMake(newColorComponents[0], newColorComponents[1],
                              newColorComponents[2], newColorComponents[3]),
                  &newColorH, &newColorS, &newColorV);
   self.colorPicker.brightness = newColorV;

@@ -8,19 +8,19 @@
 
 #import "QPBitmapContextRep.h"
 
-BMPoint BMPointMake(long x, long y) {
+BMPoint QPBMPointMake(long x, long y) {
   BMPoint p;
   p.x = x;
   p.y = y;
   return p;
 }
 
-BMPoint BMPointFromSize(CGSize size) {
-  return BMPointMake(round(size.width), round(size.height));
+BMPoint QPBMPointFromSize(CGSize size) {
+  return QPBMPointMake(round(size.width), round(size.height));
 }
 
-BMPoint BMPointFromPoint(CGPoint point) {
-  return BMPointMake(round(point.x), round(point.y));
+BMPoint QPBMPointFromPoint(CGPoint point) {
+  return QPBMPointMake(round(point.x), round(point.y));
 }
 
 @implementation QPBitmapContextRep
