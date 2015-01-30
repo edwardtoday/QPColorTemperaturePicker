@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
                    iPhone color temperature picker view with brightness control and delegation support.
                    DESC
-  s.homepage     = "https://github.com/edwardtoday/QPColorTemperautrePicker"
+  s.homepage     = "https://github.com/edwardtoday/QPColorTemperaturePicker"
   s.screenshots  = "https://raw.githubusercontent.com/edwardtoday/QPColorTemperaturePicker/v0.1.2/Example01.png", "https://raw.githubusercontent.com/edwardtoday/QPColorTemperaturePicker/v0.1.2/Example02.png", "https://raw.githubusercontent.com/edwardtoday/QPColorTemperaturePicker/v0.1.2/Example03.png", "https://raw.githubusercontent.com/edwardtoday/QPColorTemperaturePicker/v0.1.2/Example04.png"
   s.license      = { :type => 'BSD', :file => "LICENSE.md" }
   s.author       = { "Pei" => "edwardtoday@gmail.com" }
